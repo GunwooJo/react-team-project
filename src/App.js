@@ -1,11 +1,9 @@
 import React from "react";
-
-function App() {
-  return (
-    <div className="App">
-      <h1>초기셋팅</h1>
+import Test01 from "./constants/Test01";
+export default function App(){
+  return(
+    <div>
+      <Test01/>
     </div>
-  );
+  )
 }
-
-export default App;
