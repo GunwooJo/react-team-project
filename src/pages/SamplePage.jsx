@@ -1,8 +1,11 @@
 import React from 'react'
+import Test01 from '../constants/Test01'
 
 function SamplePage() {
   return (
-    <div>샘플 페이지 예시입니다.</div>
+    <div>
+      <Test01/>
+    </div>
   )
 }
 
