@@ -1,8 +1,10 @@
 import React from "react";
+import Header from "./components/Header";
 
 function App() {
   return (
-    <div className="App">
+    <div>
+      <Header/>
       <h1>초기셋팅</h1>
     </div>
   );
