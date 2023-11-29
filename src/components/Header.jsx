@@ -1,4 +1,4 @@
-import {React, useState} from 'react'
+import { React, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -6,6 +6,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import { InputGroup } from 'react-bootstrap';
 
 function Header() {
   const [dropdownTitle, setDropdownTitle] = useState('이름');
@@ -19,13 +20,13 @@ function Header() {
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
 
-        <Navbar.Brand href="#" style={{display: 'flex'}}>
-          <img src="free_icon_recipe_book.png" style={{width: '30px', marginRight: '5px'}} alt='메인로고'/>
+        <Navbar.Brand href="#" style={{ display: 'flex' }}>
+          <img src="free_icon_recipe_book.png" style={{ width: '30px', marginRight: '5px' }} alt='메인로고' />
           <span>오늘의 레시피</span>
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="navbarScroll" />
-        
+
         <Navbar.Collapse id="navbarScroll">
 
           <Nav
@@ -40,22 +41,23 @@ function Header() {
           </Nav>
 
           <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="레시피 검색"
-              className="me-2"
-              aria-label="Search"
-              htmlSize={80}
-            />
+            <InputGroup>
+              <Form.Control
+                aria-label="Text input with dropdown button"
+                type="search"
+                placeholder="레시피 검색"
+                htmlSize={80} />
 
-            <DropdownButton 
-              id="dropdown-basic-button" 
-              title={dropdownTitle} variant="outline-secondary" 
-              onSelect={(eventKey) => handleSelectDropdown(eventKey)}
-            >
-              <Dropdown.Item eventKey='이름'>이름</Dropdown.Item>
-              <Dropdown.Item eventKey='예시1'>예시1</Dropdown.Item>
-            </DropdownButton>
+              <DropdownButton
+                variant="outline-secondary"
+                title={dropdownTitle}
+                id="dropdown-basic-button"
+                align="end"
+                onSelect={(eventKey) => handleSelectDropdown(eventKey)}>
+                <Dropdown.Item eventKey='이름'>이름</Dropdown.Item>
+                <Dropdown.Item eventKey='예시1'>예시1</Dropdown.Item>
+              </DropdownButton>
+            </InputGroup>
             <Button style={{marginLeft: '8px'}} variant="outline-info">Search</Button>
           </Form>
 
