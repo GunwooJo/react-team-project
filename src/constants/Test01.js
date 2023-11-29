@@ -6,6 +6,13 @@ import { APIKEY } from './apidata';
 
 export default function Test01(){
 
+  // const [cookBoil,setCookBoil] = useState([]);
+  // const getData = async ()->{
+  //   axios
+  //   .get('https://openapi.foodsafetykorea.go.kr/api/419cf02bcbf849288b6f/COOKRCP01/json/1/5/RCP_WAY2=끄')
+
+  // }
+
         let list = new Array();
         axios
         .get('https://openapi.foodsafetykorea.go.kr/api/419cf02bcbf849288b6f/COOKRCP01/json/1/5/RCP_PAT2=반찬')
