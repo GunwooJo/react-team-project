@@ -16,7 +16,7 @@ export default function Test01() {
         .then((response) => {
           let foodNameList = new Array();
           for (let i = 0; i < 564; i++) {
-            const foodName = response.data.COOKRCP01.row[i].RCP_NM;
+            const foodName = response.data.COOKRCP01.row[i];
             if (foodName === null) break;
 
             foodNameList.push(foodName);
@@ -33,5 +33,5 @@ export default function Test01() {
 
 
   //데이터 활용 부분
-  return <div>{cookBoil[3]}</div>;
+  return <div>{cookBoil[5].RCP_NM}</div>;
 }
