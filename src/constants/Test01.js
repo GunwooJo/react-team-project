@@ -12,18 +12,23 @@ export default function Test01() {
         );
 
         let foodNameList = [];
-        for (let i = 0; i < 998; i++) {
-          const foodName = response.data.COOKRCP01.row[i].RCP_PAT2;
+        for (let i = 0; i < 50; i++) {
+          const foodName = response.data.COOKRCP01.row[i].RCP_PARTS_DTLS;
           if (foodName === null) break;
 
           foodNameList.push(foodName);
-          console.log(foodName);
+
         }
 
         // Remove duplicates by converting the array to a Set and then back to an array
         const cookList = [...new Set(foodNameList)];
-        
-        console.log(cookList);
+        const filter=cookList.map(foodName=>{
+                const nameFilter = foodName.substring(0,3);
+                return {nameFilter};
+        });
+
+        console.log(filter);
+        // console.log(cookList);
       } catch (error) {
         console.log(error);
       }
