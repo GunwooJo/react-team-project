@@ -55,7 +55,9 @@ function Header() {
                 align="end"
                 onSelect={(eventKey) => handleSelectDropdown(eventKey)}>
                 <Dropdown.Item eventKey='이름'>이름</Dropdown.Item>
-                <Dropdown.Item eventKey='예시1'>예시1</Dropdown.Item>
+                <Dropdown.Item eventKey='조리방식'>조리방식</Dropdown.Item>
+                <Dropdown.Item eventKey='재료'>재료</Dropdown.Item>
+                <Dropdown.Item eventKey='요리종류'>요리종류</Dropdown.Item>
               </DropdownButton>
             </InputGroup>
             <Button style={{marginLeft: '8px'}} variant="outline-info">Search</Button>
