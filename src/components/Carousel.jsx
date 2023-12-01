@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { React, useState, useRef} from 'react'
 import { Card, Row } from 'react-bootstrap'
 
 function Carousel() {
@@ -9,31 +9,54 @@ function Carousel() {
     { title: "title5", readme: "Lorem Ipsum is simply dummy text of the printing and typesetting industry." }]);
     const [leftVal, setLeftVal] = useState([10, 30, 50, 70, 90]);
     const [topVal, setTopVal] = useState([0, 30, 60, 30, 0]);
+    const listRef = useRef();
+    
+    const shiftToLeft = (arr) => {
+        let tempArr = Object.assign([], arr);
+        let item = tempArr.splice(tempArr.length - 1, 1)[0];
+        tempArr.unshift(item);
+        return tempArr;
+    }
+
+    const shiftToRight = (arr) => {
+        let tempArr = Object.assign([], arr);
+        let item = tempArr.splice(0, 1)[0];
+        tempArr.push(item);
+        return tempArr;
+    }
 
     const moveCard = (arrowNom) => {
-        if(arrowNom == 0) {
-            let tempArr = Object.assign([], leftVal);
-            let item = tempArr.splice(0, 1)[0];
-            tempArr.push(item);
-            console.log(tempArr);
-            setLeftVal(tempArr);
+        if (arrowNom == 0) {
+            [...listRef.current.children].forEach((v,i) => {
+                v.style.transition = "1s";
+                v.style.left = leftVal[(i+1) == 5 ? 0 : i + 1] + "%";
+                v.style.top = topVal[(i-1) == -1 ? 4 : i - 1] + "px";
+                v.style["z-index"] = topVal[(i-1) == -1 ? 4 : i - 1];
+            });
+            
+            setLeftVal(shiftToLeft(leftVal));
+            setTopVal(shiftToLeft(topVal));
         } else {
-            // let tempArr = Object.assign([], cardData);
-            // let tmp = tempArr[tempArr.length];
-            // tempArr.splice(tempArr.length, 1);
-            // tempArr.unshift(tmp);
-            // setCardData(tempArr);
+            [...listRef.current.children].forEach((v,i) => {
+                v.style.transition = "1s";
+                v.style.left = leftVal[(i-1) == -1 ? 4 : i - 1] + "%";
+                v.style.top = topVal[(i+1) == 5 ? 0 : i + 1] + "px";
+                v.style["z-index"] =topVal[(i+1) == 5 ? 0 : i + 1] ;
+            });
+            setLeftVal(shiftToRight(leftVal));
+            setTopVal(shiftToRight(topVal));
         }
     }
 
     return (
         <div style={{ position: "relative", width: "1024px", margin: " 30px auto", height: "395px" }}>
-            <div onClick={() => moveCard(0)}
-            style={{ fontSize: "50px", position: "absolute", zIndex: 10, left: "-85px", top: "50%", transform: "translateY(-50%)", cursor: "pointer" }}>〈</div>
+            <div onClick={() => moveCard(0)} 
+                style={{ fontSize: "50px", position: "absolute", zIndex: 10, left: "-85px", top: "50%", transform: "translateY(-50%)", cursor: "pointer" }}>〈</div>
+            <div ref={listRef}>
             {
                 cardData.map((v, i) =>
                     <Card style={{
-                        width: '18rem', position: 'absolute', zIndex: ((i < 3) ? i + 1 : 3 - i),
+                        width: '18rem', position: 'absolute', zIndex: ((i < 2) ? i : 2 + (2 - i)),
                         left: leftVal[i] + "%",
                         top: topVal[i] + "px",
                         transform: "translateX(-50%)"
@@ -45,7 +68,10 @@ function Carousel() {
                         </Card.Body>
                     </Card>)
             }
-            <div style={{ fontSize: "50px", position: "absolute", zIndex: 10, right: "-85px", top: "50%", transform: "translateY(-50%)", cursor: "pointer" }}>〉</div>
+            </div>
+            
+            <div onClick={() => moveCard(1)}
+            style={{ fontSize: "50px", position: "absolute", zIndex: 10, right: "-85px", top: "50%", transform: "translateY(-50%)", cursor: "pointer" }}>〉</div>
         </div>
 
     )
