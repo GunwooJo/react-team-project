@@ -1,5 +1,5 @@
 import React from 'react'
-import Test01 from '../constants/Test01'
+import Test01 from '../WorkSpace/Test01'
 
 function SamplePage() {
   return (

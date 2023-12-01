@@ -12,23 +12,26 @@ export default function Test01() {
         );
 
         let foodNameList = [];
-        for (let i = 0; i < 50; i++) {
-          const foodName = response.data.COOKRCP01.row[i].RCP_PARTS_DTLS;
+
+        //음식 인덱스 범위 조정
+        for (let i = 0; i < 998; i++) {
+          const foodName = response.data.COOKRCP01.row[i].HASH_TAG;
           if (foodName === null) break;
 
           foodNameList.push(foodName);
-
         }
 
-        // Remove duplicates by converting the array to a Set and then back to an array
+        //중복 제거 기능
         const cookList = [...new Set(foodNameList)];
-        const filter=cookList.map(foodName=>{
-                const nameFilter = foodName.substring(0,3);
-                return {nameFilter};
+
+        //특정 글자수만 나타내기
+        const filter = cookList.map((foodName) => {
+          const nameFilter = foodName.substring(0, 20);
+          return nameFilter;
         });
 
+        //결과값 확인용
         console.log(filter);
-        // console.log(cookList);
       } catch (error) {
         console.log(error);
       }
@@ -38,5 +41,4 @@ export default function Test01() {
   }, []);
 
   // 데이터 활용 부분
-
 }
