@@ -1,9 +1,9 @@
 import React from "react";
-import Test01 from "./WorkSpace/Test01";
+import Create from "./components/AddRecipe";
 export default function App(){
   return(
     <div>
-      
+      <Create/>
     </div>
   )
 }
