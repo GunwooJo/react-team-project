@@ -1,13 +1,17 @@
 import React from "react";
-import Carousel from "./components/Carousel";
 import Header from "./components/Header";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import MainPage from "./pages/MainPage";
 
 function App() {
   return (
     <div>
       <Header/>
-      <Carousel/>
-      <h1>초기셋팅</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<MainPage/>}/>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
