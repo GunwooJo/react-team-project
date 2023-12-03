@@ -6,7 +6,7 @@ function MainPage() {
   return (
     <div>
       <Carousel/>
-      <RecipeCategory/>    
+      <RecipeCategory/>
     </div>
   )
 }

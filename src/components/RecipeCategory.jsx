@@ -33,14 +33,14 @@ function RecipeCategory() {
 
   return (
     <div>
-      <div style={{ display:'flex', justifyContent: 'center'}}>
+      <div style={{ display:'flex', justifyContent: 'center', backgroundColor: '#D9D9D9', height:'170px' }}>
       {
         foodCategoryList.map((foodCategoryObj, idx) => {
           return (
-            <div style={{ marginRight: '30px', cursor: 'pointer' }} onClick={handleRouting}>
+            <div style={{ marginRight: '30px', cursor: 'pointer', paddingTop: '28px' }} onClick={handleRouting}>
               {/* 음식사진과 카테고리 제목 */}
               <img src={ foodCategoryObj.imageUrl } alt='음식사진' style={{ borderRadius: '70%', width: '90px', height: '90px' }}/>
-              <p style={{ textAlign: 'center', marginTop: '5px' }}>{ foodCategoryObj.title }</p>
+              <div style={{ textAlign: 'center', marginTop: '5px' }}>{ foodCategoryObj.title }</div>
             </div>
           )
         })
