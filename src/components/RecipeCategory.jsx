@@ -33,7 +33,7 @@ function RecipeCategory() {
 
   return (
     <div>
-      <div style={{ display:'flex' }}>
+      <div style={{ display:'flex', justifyContent: 'center'}}>
       {
         foodCategoryList.map((foodCategoryObj, idx) => {
           return (
