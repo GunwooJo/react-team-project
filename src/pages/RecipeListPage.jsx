@@ -5,16 +5,88 @@ function RecipeListPage() {
   //totalRecipeDataList 라는 이름의 변수 또는 state에 음식정보 배열을 넣으면 작동합니다.
   const totalRecipeDataList = [
     {
-      name: '짜장면1',
-      category: '중식'
+      RCP_NM: '짜장면1',
+      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
+      RCP_PAT2: '후식',
+      RCP_WAY2: '삶기',
+      INFO_ENG: '700'
     },
     {
-      name: '토마토파스타2',
-      category: '양식'
+      RCP_NM: '짜장면1',
+      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
+      RCP_PAT2: '후식',
+      RCP_WAY2: '삶기',
+      INFO_ENG: '700'
     },
     {
-      name: '토마토파스타3',
-      category: '양식'
+      RCP_NM: '짜장면1',
+      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
+      RCP_PAT2: '후식',
+      RCP_WAY2: '삶기',
+      INFO_ENG: '700'
+    },
+    {
+      RCP_NM: '짜장면1',
+      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
+      RCP_PAT2: '후식',
+      RCP_WAY2: '삶기',
+      INFO_ENG: '700'
+    },
+    {
+      RCP_NM: '짜장면1',
+      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
+      RCP_PAT2: '후식',
+      RCP_WAY2: '삶기',
+      INFO_ENG: '700'
+    },
+    {
+      RCP_NM: '짜장면1',
+      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
+      RCP_PAT2: '후식',
+      RCP_WAY2: '삶기',
+      INFO_ENG: '700'
+    },
+    {
+      RCP_NM: '짜장면1',
+      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
+      RCP_PAT2: '후식',
+      RCP_WAY2: '삶기',
+      INFO_ENG: '700'
+    },
+    {
+      RCP_NM: '짜장면1',
+      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
+      RCP_PAT2: '후식',
+      RCP_WAY2: '삶기',
+      INFO_ENG: '700'
+    },
+    {
+      RCP_NM: '짜장면1',
+      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
+      RCP_PAT2: '후식',
+      RCP_WAY2: '삶기',
+      INFO_ENG: '700'
+    },
+    {
+      RCP_NM: '짜장면1',
+      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
+      RCP_PAT2: '후식',
+      RCP_WAY2: '삶기',
+      INFO_ENG: '700'
+    },
+    {
+      RCP_NM: '짜장면1',
+      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
+      RCP_PAT2: '후식',
+      RCP_WAY2: '삶기',
+      INFO_ENG: '700'
+    },
+    {
+      RCP_NM: '짜장면1',
+      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
+      RCP_PAT2: '후식',
+      RCP_WAY2: '삶기',
+      INFO_ENG: '700'
     }
   ]
 
@@ -70,16 +142,34 @@ function RecipeListPage() {
 
   return (
     <div>
-      {
-        currentPageRecipeList.map(obj => <div>{obj.name}</div>)
-      }
-      <Pagination>
-        <Pagination.Prev onClick={handlePreviousPage} disabled={currentPageNum === 1} />
-        {currentRange > 1 && <Pagination.Item onClick={handlePreviousRange}>...</Pagination.Item>}
-        {items}
-        {currentRange < totalRanges && <Pagination.Item onClick={handleNextRange}>...</Pagination.Item>}
-        <Pagination.Next onClick={handleNextPage} disabled={currentPageNum === totalNumOfPages} />
-      </Pagination>
+
+      {/* 음식들 ui */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '30px', margin: '0 15vw', height: '80vh'}} >
+        {
+          currentPageRecipeList.map(recipeObj => {
+            return (
+              <div style={{ textAlign:'center' }}>
+                <img src={recipeObj.ATT_FILE_NO_MK} style={{ width: '200px', height: '200px' }} alt='레시피 이미지' />
+                <div>{recipeObj.RCP_PAT2}</div>
+                <b>{recipeObj.RCP_NM}</b>
+                <div>{recipeObj.RCP_WAY2}{' '}{recipeObj.INFO_ENG}kcal</div>
+              </div>
+            )
+          })
+        }
+      </div>
+
+      {/* 페이지번호 ui */}
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Pagination>
+          <Pagination.Prev onClick={handlePreviousPage} disabled={currentPageNum === 1} />
+          {currentRange > 1 && <Pagination.Item onClick={handlePreviousRange}>...</Pagination.Item>}
+          {items}
+          {currentRange < totalRanges && <Pagination.Item onClick={handleNextRange}>...</Pagination.Item>}
+          <Pagination.Next onClick={handleNextPage} disabled={currentPageNum === totalNumOfPages} />
+        </Pagination>
+      </div>
+      
     </div>
   )  
 }
