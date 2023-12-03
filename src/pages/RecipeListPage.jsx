@@ -127,6 +127,9 @@ function RecipeListPage() {
     setCurrentRange(prev => Math.max(prev - 1, 1));
   };
   
+  const handleRouting = () => {
+    alert('레시피 상세페이지로 이동!(추후 구현)');
+  }
   
   const items = [];
   const startPage = (currentRange - 1) * rangeSize + 1;
@@ -142,17 +145,19 @@ function RecipeListPage() {
 
   return (
     <div>
-
+      <p style={{marginLeft: '20vw', marginTop: '10px'}}>총 {totalRecipeDataList.length}개의 맛있는 레시피가 있습니다.</p>
+      <hr style={{width: '60vw', margin: '0 auto', marginBottom: '50px'}}/>
+      
       {/* 음식들 ui */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '30px', margin: '0 15vw', height: '80vh'}} >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0px 30px', margin: '0 15vw', height: '70vh'}} >
         {
           currentPageRecipeList.map(recipeObj => {
             return (
-              <div style={{ textAlign:'center' }}>
+              <div style={{ textAlign:'center', cursor: 'pointer' }} onClick={handleRouting} >
                 <img src={recipeObj.ATT_FILE_NO_MK} style={{ width: '200px', height: '200px' }} alt='레시피 이미지' />
-                <div>{recipeObj.RCP_PAT2}</div>
+                <div style={{color: '#555555'}}>{recipeObj.RCP_PAT2}</div>
                 <b>{recipeObj.RCP_NM}</b>
-                <div>{recipeObj.RCP_WAY2}{' '}{recipeObj.INFO_ENG}kcal</div>
+                <div style={{color: '#555555'}}>{recipeObj.RCP_WAY2}{' '}{recipeObj.INFO_ENG}kcal</div>
               </div>
             )
           })
