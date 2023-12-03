@@ -20,7 +20,7 @@ function Header() {
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
 
-        <Navbar.Brand href="#" style={{ display: 'flex' }}>
+        <Navbar.Brand href="/" style={{ display: 'flex' }}>
           <img src="free_icon_recipe_book.png" style={{ width: '30px', marginRight: '5px' }} alt='메인로고' />
           <span>오늘의 레시피</span>
         </Navbar.Brand>
@@ -34,7 +34,7 @@ function Header() {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link href="#action1">둘러보기</Nav.Link>
+            <Nav.Link href="/recipe/list">둘러보기</Nav.Link>
             <Nav.Link href="#action2">레시피</Nav.Link>
             <Nav.Link href="#action3">키친가이드</Nav.Link>
             <Nav.Link href="#action3">레시피등록</Nav.Link>
