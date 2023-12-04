@@ -6,23 +6,17 @@ import { useParams } from 'react-router-dom';
 function RecipeDetailPage() {
 
   const { RCP_NM } = useParams();
-  const [recipeObj, setRecipeObj] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [numOfManual, setNumOfManual] = useState(0);
-  const [numOfManualImg, setNumOfManualImg] = useState(0);
+  const [manualList, setManualList] = useState([]);
+  const [manualImgList, setManualImgList] = useState([]);
 
   const fetchRecipeData = async () => {
     try {
       const response = await axios.get(`${FOOD_SAFETY_KOREA_URL}/1/1000/RCP_NM=${RCP_NM}`);
-      setRecipeObj(response.data.COOKRCP01.row[0]);
+      const recipeData = response.data.COOKRCP01.row[0];
 
-      if(recipeObj) {
-        const manualNum = checkHowManyManual(recipeObj);
-        setNumOfManual(manualNum);
-
-        const manualImgNum = checkHowManyManualImg(recipeObj);
-        setNumOfManualImg(manualImgNum);
-      }
+      makeManualList(recipeData);
+      makeManualImgList(recipeData);      
 
     } catch (error) {
       alert('오류가 발생했어요. 잠시 후 다시 시도해주세요.');
@@ -32,28 +26,34 @@ function RecipeDetailPage() {
     }
   }
 
-  //메뉴얼이 몇개 등록되어있는지 확인.
-  const checkHowManyManual = (recipeObj) => {
+  //manualList에 메뉴얼 내용 배열로 담기.
+  const makeManualList = (recipeObj) => {
     if(!recipeObj) throw Error('인자 없음.');
-    
+
+    let newList = [];
     for(let i = 1 ; i <= 20 ; i++) {
       const num = i.toString().padStart(2, '0');
       
-      if(!recipeObj[`MANUAL${num}`])
-        return i-1;
+      if(!recipeObj[`MANUAL${num}`])  break;
+
+      newList.push(recipeObj[`MANUAL${num}`])
     }
+    setManualList(newList);
   }
 
-  //메뉴얼 이미지가 몇개 등록되어있는지 확인.
-  const checkHowManyManualImg = (recipeObj) => {
+  //manualImgList 메뉴얼 이미지 배열로 담기.
+  const makeManualImgList = (recipeObj) => {
     if(!recipeObj) throw Error('인자 없음.');
     
+    let newList = [];
     for(let i = 1 ; i <= 20 ; i++) {
       const num = i.toString().padStart(2, '0');
       
-      if(!recipeObj[`MANUAL_IMG${num}`])
-        return i-1;
+      if(!recipeObj[`MANUAL_IMG${num}`])  break;
+
+      newList.push(recipeObj[`MANUAL_IMG${num}`])
     }
+    setManualImgList(newList);
   }
 
   useEffect(()=>{
@@ -62,7 +62,16 @@ function RecipeDetailPage() {
 
   return (
     <div>
-      test
+      {
+        manualList.map((manual, idx) => {
+          return (
+            <div key={manual}>
+              <img src={manualImgList[idx]} alt='메뉴얼 이미지'/>
+              <p>{manual}</p>
+            </div>
+          )
+        })
+      }
     </div>  
   )
 }
