@@ -9,6 +9,7 @@ function RecipeDetailPage() {
   const [recipeObj, setRecipeObj] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [numOfManual, setNumOfManual] = useState(0);
+  const [numOfManualImg, setNumOfManualImg] = useState(0);
 
   const fetchRecipeData = async () => {
     try {
@@ -16,8 +17,11 @@ function RecipeDetailPage() {
       setRecipeObj(response.data.COOKRCP01.row[0]);
 
       if(recipeObj) {
-        const num = checkHowManyManual(recipeObj);
-        setNumOfManual(num);
+        const manualNum = checkHowManyManual(recipeObj);
+        setNumOfManual(manualNum);
+
+        const manualImgNum = checkHowManyManualImg(recipeObj);
+        setNumOfManualImg(manualImgNum);
       }
 
     } catch (error) {
@@ -36,6 +40,18 @@ function RecipeDetailPage() {
       const num = i.toString().padStart(2, '0');
       
       if(!recipeObj[`MANUAL${num}`])
+        return i-1;
+    }
+  }
+
+  //메뉴얼 이미지가 몇개 등록되어있는지 확인.
+  const checkHowManyManualImg = (recipeObj) => {
+    if(!recipeObj) throw Error('인자 없음.');
+    
+    for(let i = 1 ; i <= 20 ; i++) {
+      const num = i.toString().padStart(2, '0');
+      
+      if(!recipeObj[`MANUAL_IMG${num}`])
         return i-1;
     }
   }
