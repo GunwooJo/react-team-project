@@ -9,12 +9,14 @@ function RecipeDetailPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [manualList, setManualList] = useState([]);
   const [manualImgList, setManualImgList] = useState([]);
+  const [recipeObj, setRecipeObj] = useState({});
 
   const fetchRecipeData = async () => {
     try {
       const response = await axios.get(`${FOOD_SAFETY_KOREA_URL}/1/1000/RCP_NM=${RCP_NM}`);
       const recipeData = response.data.COOKRCP01.row[0];
-
+      
+      setRecipeObj(recipeData);
       makeManualList(recipeData);
       makeManualImgList(recipeData);      
 
