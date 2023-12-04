@@ -25,7 +25,7 @@ function RecipeDetailPage() {
       }
 
     } catch (error) {
-      alert('axios 요청에러.');
+      alert('오류가 발생했어요. 잠시 후 다시 시도해주세요.');
       console.error(error);
     } finally {
       setIsLoading(false);
