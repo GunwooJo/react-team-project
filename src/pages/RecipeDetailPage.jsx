@@ -81,14 +81,15 @@ function RecipeDetailPage() {
         <b style={{margin: 'auto 3px'}}>나트륨: {recipeObj.INFO_NA}</b>
       </div>
 
-      <hr style={{width: '60vw', margin: '0 auto', marginBottom: '50px'}}/>
-      <b>{recipeObj.RCP_PARTS_DTLS}</b>
+      <hr style={{width: '60vw', margin: '20px auto', marginBottom: '50px'}}/>
+      <div style={{marginTop: '40px' , marginBottom: '80px'}}><b>{recipeObj.RCP_PARTS_DTLS}</b></div>
+      
 
       {
         manualList.map((manual, idx) => {
           return (
-            <div key={manual}>
-              <img src={manualImgList[idx]} alt='레시피 단계 이미지' />
+            <div style={{marginBottom: '70px'}} key={manual}>
+              <img style={{marginBottom: '20px', width: '300px'}} src={manualImgList[idx]} alt='레시피 단계 이미지' />
               <br/>
               <b>{manual}</b>
             </div>
