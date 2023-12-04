@@ -44,20 +44,9 @@ function RecipeDetailPage() {
     fetchRecipeData();
   }, [])
 
-  const num = 1;
   return (
     <div>
-      <h1>{recipeObj.RCP_NM}</h1> {/* Recipe Title */}
-      <img src={recipeObj.ATT_FILE_NO_MAIN} alt="Main" /> {/* Main Image */}
-      <p>Cooking Method: {recipeObj.RCP_WAY2}</p>
-      <p>Type of Dish: {recipeObj.RCP_PAT2}</p>
-      <p>Ingredients: {recipeObj.RCP_PARTS_DTLS}</p>
-      <p>Nutritional Info: Calories - {recipeObj.INFO_ENG}, Carbs - {recipeObj.INFO_CAR}, Protein - {recipeObj.INFO_PRO}, Fat - {recipeObj.INFO_FAT}, Sodium - {recipeObj.INFO_NA}</p>
-      <div>
-        메뉴얼: {recipeObj[`MANUAL${'0' + num}`]}
-      </div>
-      <p>Tip: {recipeObj.RCP_NA_TIP}</p>
-      <p>메뉴얼 갯수: {numOfManual}</p>
+      test
     </div>  
   )
 }
