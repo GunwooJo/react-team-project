@@ -2,97 +2,13 @@ import { React, useState, useEffect } from 'react'
 import Pagination from 'react-bootstrap/Pagination';
 import Header from '../components/Header';
 import { useLocation } from "react-router-dom";
+import { serviceDB } from '../constants/apidata';
 
 function RecipeListPage() {
   // 값 보내면 state로 들어옴.
   const props = useLocation();
   //totalRecipeDataList 라는 이름의 변수 또는 state에 음식정보 배열을 넣으면 작동합니다.
-  const [totalRecipeDataList, setTotalRecipeDataList] = useState([
-    {
-      RCP_NM: '짜장면1',
-      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
-      RCP_PAT2: '후식',
-      RCP_WAY2: '삶기',
-      INFO_ENG: '700'
-    },
-    {
-      RCP_NM: '짜장면1',
-      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
-      RCP_PAT2: '후식',
-      RCP_WAY2: '삶기',
-      INFO_ENG: '700'
-    },
-    {
-      RCP_NM: '짜장면1',
-      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
-      RCP_PAT2: '후식',
-      RCP_WAY2: '삶기',
-      INFO_ENG: '700'
-    },
-    {
-      RCP_NM: '짜장면1',
-      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
-      RCP_PAT2: '후식',
-      RCP_WAY2: '삶기',
-      INFO_ENG: '700'
-    },
-    {
-      RCP_NM: '짜장면1',
-      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
-      RCP_PAT2: '후식',
-      RCP_WAY2: '삶기',
-      INFO_ENG: '700'
-    },
-    {
-      RCP_NM: '짜장면1',
-      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
-      RCP_PAT2: '후식',
-      RCP_WAY2: '삶기',
-      INFO_ENG: '700'
-    },
-    {
-      RCP_NM: '짜장면1',
-      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
-      RCP_PAT2: '후식',
-      RCP_WAY2: '삶기',
-      INFO_ENG: '700'
-    },
-    {
-      RCP_NM: '짜장면1',
-      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
-      RCP_PAT2: '후식',
-      RCP_WAY2: '삶기',
-      INFO_ENG: '700'
-    },
-    {
-      RCP_NM: '짜장면1',
-      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
-      RCP_PAT2: '후식',
-      RCP_WAY2: '삶기',
-      INFO_ENG: '700'
-    },
-    {
-      RCP_NM: '짜장면1',
-      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
-      RCP_PAT2: '후식',
-      RCP_WAY2: '삶기',
-      INFO_ENG: '700'
-    },
-    {
-      RCP_NM: '짜장면1',
-      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
-      RCP_PAT2: '후식',
-      RCP_WAY2: '삶기',
-      INFO_ENG: '700'
-    },
-    {
-      RCP_NM: '짜장면1',
-      ATT_FILE_NO_MK: 'https://minio.nculture.org/amsweb-opt/multimedia_assets/5/13787/20519/c/13787-full-size.jpg',
-      RCP_PAT2: '후식',
-      RCP_WAY2: '삶기',
-      INFO_ENG: '700'
-    }
-  ]);
+  const [totalRecipeDataList, setTotalRecipeDataList] = useState([]);
   useEffect(() => {
     console.log(props.state);
     if (props.state) {
@@ -101,6 +17,16 @@ function RecipeListPage() {
     }
   }, [props]);
 
+  //페이지 처음 불러올 때 모든 레시피 보여주기.
+  useEffect(() => {
+    serviceDB.getAllData({
+      callback: (res) => {
+        const response = res.row;
+        setTotalRecipeDataList(response);
+      }
+    });
+  }, [])
+  
   const numOfItemsPerPage = 8;
   const totalNumOfPages = Math.ceil(totalRecipeDataList.length / numOfItemsPerPage); //해당 소수보다 크거나 같은 정수 반환. ex) 1.2 -> 2
 

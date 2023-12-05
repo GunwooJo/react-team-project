@@ -39,5 +39,17 @@ export const serviceDB = {
                 param.callback(dataArr);
             }
         });
+    },
+
+    getAllData: async (param) => {
+      try {
+        const response = await axios.get(`${FOOD_SAFETY_KOREA_URL}/1/1000`);
+
+        if(param.callback)
+          param.callback(response.data.COOKRCP01);
+
+      } catch (error) {
+        console.error(error);
+      }
     }
 };
