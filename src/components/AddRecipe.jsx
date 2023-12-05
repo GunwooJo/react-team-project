@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-const Create =()=>{
+const AddRecipe =()=>{
     const [title,setTitle] = useState('');
     const [des,setDes] = useState('');
 
@@ -9,8 +9,8 @@ const Create =()=>{
         e.preventDefault(); //페이지 이동하지 않게 해주기 위해 사용
         
         axios.post('http://localhost:3001/addRecipe',{
-            title: title,
-            des : des
+            RCP_NM: title,
+            RCP_PARTS_DTLS : des
         }).then(()=>{
             console.log('생성완료')
         })
@@ -31,4 +31,4 @@ const Create =()=>{
     )
 }
 
-export default Create;
+export default AddRecipe;
