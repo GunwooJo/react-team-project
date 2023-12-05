@@ -20,15 +20,13 @@ function Header() {
   }
 
   const searchEvent = () => {
-    // console.log(dropdownTitle, ", ", inpRef.current.value);
     let text = inpRef.current.value;
     serviceDB.findDataToSearch("Header", {
       val: text,
       title: dropdownTitle,
       callback: (res) => {
         console.log(res);
-        // history.push('/my-page', { data });
-
+        navigate('/recipe/list', {state: { data: res }});
     }});
   }
 
