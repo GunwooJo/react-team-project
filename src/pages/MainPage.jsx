@@ -1,13 +1,16 @@
 import React from 'react'
 import Carousel from '../components/Carousel'
 import RecipeCategory from '../components/RecipeCategory'
+import Header from '../components/Header'
 
 function MainPage() {
   return (
-    <div>
+    <>
+      
+      <Header/>
       <Carousel/>
       <RecipeCategory/>
-    </div>
+    </>
   )
 }
 

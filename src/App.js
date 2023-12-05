@@ -9,11 +9,10 @@ import RecipeDetailPage from "./pages/RecipeDetailPage";
 function App() {
   return (
     <div>
-      <Header/>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<MainPage/>}/>
-          <Route path='/recipe/list' element={<RecipeListPage/>}/>
+          <Route path='/recipe/list' element={<RecipeListPage />}/>
           <Route path='/recipe/:RCP_NM' element={<RecipeDetailPage/>}/>
         </Routes>
       </BrowserRouter>

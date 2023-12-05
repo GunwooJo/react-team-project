@@ -1,5 +1,6 @@
 import {React, useState} from 'react'
 import Pagination from 'react-bootstrap/Pagination';
+import Header from '../components/Header';
 
 function RecipeListPage() {
   //totalRecipeDataList 라는 이름의 변수 또는 state에 음식정보 배열을 넣으면 작동합니다.
@@ -144,7 +145,8 @@ function RecipeListPage() {
   }
 
   return (
-    <div>
+    <>
+      <Header/>
       <p style={{marginLeft: '20vw', marginTop: '10px'}}>총 {totalRecipeDataList.length}개의 맛있는 레시피가 있습니다.</p>
       <hr style={{width: '60vw', margin: '0 auto', marginBottom: '50px'}}/>
       
@@ -175,7 +177,7 @@ function RecipeListPage() {
         </Pagination>
       </div>
       
-    </div>
+    </>
   )  
 }
 

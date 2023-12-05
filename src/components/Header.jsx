@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { React, useState, useRef, useEffect } from 'react'
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -7,13 +7,29 @@ import Navbar from 'react-bootstrap/Navbar';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { InputGroup } from 'react-bootstrap';
+import { serviceDB } from '../constants/apidata';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
+  const navigate = useNavigate();
   const [dropdownTitle, setDropdownTitle] = useState('이름');
-
+  const inpRef = useRef();
   //검색칸 옆의 드랍다운 버튼을 눌렀을 때 일어날 동작.
   const handleSelectDropdown = (eventKey) => {
     setDropdownTitle(eventKey);
+  }
+
+  const searchEvent = () => {
+    // console.log(dropdownTitle, ", ", inpRef.current.value);
+    let text = inpRef.current.value;
+    serviceDB.findDataToSearch("Header", {
+      val: text,
+      title: dropdownTitle,
+      callback: (res) => {
+        console.log(res);
+        // history.push('/my-page', { data });
+
+    }});
   }
 
   return (
@@ -46,6 +62,7 @@ function Header() {
                 aria-label="Text input with dropdown button"
                 type="search"
                 placeholder="레시피 검색"
+                ref={inpRef}
                 htmlSize={80} />
 
               <DropdownButton
@@ -60,7 +77,7 @@ function Header() {
                 <Dropdown.Item eventKey='요리종류'>요리종류</Dropdown.Item>
               </DropdownButton>
             </InputGroup>
-            <Button style={{marginLeft: '8px'}} variant="outline-info">Search</Button>
+            <Button style={{marginLeft: '8px'}} variant="outline-info" onClick={() => searchEvent()}>Search</Button>
           </Form>
 
         </Navbar.Collapse>
@@ -70,4 +87,4 @@ function Header() {
   )
 }
 
-export default Header
+export default Header;
