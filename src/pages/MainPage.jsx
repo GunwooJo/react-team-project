@@ -1,16 +1,16 @@
 import React from 'react'
 import Carousel from '../components/Carousel'
 import RecipeCategory from '../components/RecipeCategory'
-import UserRecipeListPage from './UserRecipeListPage'
+import Header from '../components/Header'
 
 function MainPage() {
   return (
-    <div>
-
-      <UserRecipeListPage/>
-      {/* <Carousel/>
-      <RecipeCategory/> */}
-    </div>
+    <>
+      
+      <Header/>
+      <Carousel/>
+      <RecipeCategory/>
+    </>
   )
 }
 

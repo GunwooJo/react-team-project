@@ -1,7 +1,8 @@
-import {React, useEffect, useState} from 'react';
+import { React, useEffect, useState } from 'react';
 import axios from 'axios';
 import { FOOD_SAFETY_KOREA_URL } from '../constants/apidata';
 import { useParams } from 'react-router-dom';
+import Header from '../components/Header';
 
 function RecipeDetailPage() {
 
@@ -18,7 +19,7 @@ function RecipeDetailPage() {
 
       setRecipeObj(recipeData);
       makeManualList(recipeData);
-      makeManualImgList(recipeData);      
+      makeManualImgList(recipeData);
 
     } catch (error) {
       alert('오류가 발생했어요. 잠시 후 다시 시도해주세요.');
@@ -30,13 +31,13 @@ function RecipeDetailPage() {
 
   //manualList에 메뉴얼 내용 배열로 담기.
   const makeManualList = (recipeObj) => {
-    if(!recipeObj) throw Error('인자 없음.');
+    if (!recipeObj) throw Error('인자 없음.');
 
     let newList = [];
-    for(let i = 1 ; i <= 20 ; i++) {
+    for (let i = 1; i <= 20; i++) {
       const num = i.toString().padStart(2, '0');
-      
-      if(!recipeObj[`MANUAL${num}`])  break;
+
+      if (!recipeObj[`MANUAL${num}`]) break;
 
       newList.push(recipeObj[`MANUAL${num}`])
     }
@@ -45,59 +46,62 @@ function RecipeDetailPage() {
 
   //manualImgList 메뉴얼 이미지 배열로 담기.
   const makeManualImgList = (recipeObj) => {
-    if(!recipeObj) throw Error('인자 없음.');
-    
+    if (!recipeObj) throw Error('인자 없음.');
+
     let newList = [];
-    for(let i = 1 ; i <= 20 ; i++) {
+    for (let i = 1; i <= 20; i++) {
       const num = i.toString().padStart(2, '0');
-      
-      if(!recipeObj[`MANUAL_IMG${num}`])  break;
+
+      if (!recipeObj[`MANUAL_IMG${num}`]) break;
 
       newList.push(recipeObj[`MANUAL_IMG${num}`])
     }
     setManualImgList(newList);
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchRecipeData();
   }, [])
 
   return (
-    <div style={{textAlign: 'center'}}>
-      
-      <img src={recipeObj.ATT_FILE_NO_MK} style={{width: '400px', marginTop: '40px', marginBottom: '20px'}} alt='레시피 대표 이미지'/>
-      <div style={{marginBottom: '30px'}}>
-        <div style={{color: '#555555', fontSize: '1.2rem'}}>{recipeObj.RCP_PAT2}</div>
-        <b style={{fontSize: '1.2rem'}}>{recipeObj.RCP_NM}</b>
+    <>
+      <Header />
+      <div style={{ textAlign: 'center' }}>
+
+        <img src={recipeObj.ATT_FILE_NO_MK} style={{ width: '400px', marginTop: '40px', marginBottom: '20px' }} alt='레시피 대표 이미지' />
+        <div style={{ marginBottom: '30px' }}>
+          <div style={{ color: '#555555', fontSize: '1.2rem' }}>{recipeObj.RCP_PAT2}</div>
+          <b style={{ fontSize: '1.2rem' }}>{recipeObj.RCP_NM}</b>
+        </div>
+
+
+        <div>
+          <b style={{ color: '#555555', margin: 'auto 10px' }}>{recipeObj.RCP_WAY2}</b>
+          <b style={{ color: '#555555', margin: 'auto 10px' }}>{recipeObj.INFO_ENG} kcal</b>
+          <b style={{ margin: 'auto 3px' }}>탄수화물: {recipeObj.INFO_CAR}</b>
+          <b style={{ margin: 'auto 3px' }}>단백질: {recipeObj.INFO_PRO}</b>
+          <b style={{ margin: 'auto 3px' }}>지방: {recipeObj.INFO_FAT}</b>
+          <b style={{ margin: 'auto 3px' }}>나트륨: {recipeObj.INFO_NA}</b>
+        </div>
+
+        <hr style={{ width: '60vw', margin: '20px auto', marginBottom: '50px' }} />
+        <div style={{ marginTop: '40px', marginBottom: '80px' }}><b>{recipeObj.RCP_PARTS_DTLS}</b></div>
+
+
+        {
+          manualList.map((manual, idx) => {
+            return (
+              <div style={{ marginBottom: '70px' }} key={manual}>
+                <img style={{ marginBottom: '20px', width: '300px' }} src={manualImgList[idx]} alt='레시피 단계 이미지' />
+                <br />
+                <b>{manual}</b>
+              </div>
+            )
+          })
+        }
+
       </div>
-      
-
-      <div>
-        <b style={{color: '#555555', margin: 'auto 10px'}}>{recipeObj.RCP_WAY2}</b>
-        <b style={{color: '#555555', margin: 'auto 10px'}}>{recipeObj.INFO_ENG} kcal</b>
-        <b style={{margin: 'auto 3px'}}>탄수화물: {recipeObj.INFO_CAR}</b>
-        <b style={{margin: 'auto 3px'}}>단백질: {recipeObj.INFO_PRO}</b>
-        <b style={{margin: 'auto 3px'}}>지방: {recipeObj.INFO_FAT}</b>
-        <b style={{margin: 'auto 3px'}}>나트륨: {recipeObj.INFO_NA}</b>
-      </div>
-
-      <hr style={{width: '60vw', margin: '20px auto', marginBottom: '50px'}}/>
-      <div style={{marginTop: '40px' , marginBottom: '80px'}}><b>{recipeObj.RCP_PARTS_DTLS}</b></div>
-      
-
-      {
-        manualList.map((manual, idx) => {
-          return (
-            <div style={{marginBottom: '70px'}} key={manual}>
-              <img style={{marginBottom: '20px', width: '300px'}} src={manualImgList[idx]} alt='레시피 단계 이미지' />
-              <br/>
-              <b>{manual}</b>
-            </div>
-          )
-        })
-      }
-
-    </div>  
+    </>
   )
 }
 
