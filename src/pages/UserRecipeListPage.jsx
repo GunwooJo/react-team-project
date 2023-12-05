@@ -1,28 +1,50 @@
 import axios from "axios";
-import {React,useState} from "react";   
+import {React,useEffect,useState} from "react";   
+import Badge from 'react-bootstrap/Badge';
+import ListGroup from 'react-bootstrap/ListGroup';
 
-const UserRecipeListPage=()=>{
-    const [title,setTitle] = useState('');
-    const [des,setDes] = useState('');
-    const ary= [];
+
+function UserRecipeListPage(){
+    const [recipeData,setrecipeData] = useState([]);
+
+const fetchRecipeData=()=>{
     axios
     .get('http://localhost:3001/addRecipe')
     .then((response)=>{
-        
-        setTitle(JSON.stringify(response.data))
-        console.log(ary.RCP_NM)
-       
-    })
-    .catch(console.log)
+        const fetchData = response.data;
+        setrecipeData(fetchData);
+    }).catch(console.error)
+}
+
+
+useEffect(()=>{
+    fetchRecipeData();
+},[])
 
     return(
         <div>
-            {title}
-         
+            {
+                   recipeData.map((data,index)=>{
+                    return(
+                        <ListGroup as="ol" >
+                        <ListGroup.Item
+                        as="li"
+                        className="d-flex justify-content-between align-items-start"
+                        >
+                            <div className="ms-2 me-auto">
+                                <div >{data.RCP_NM}</div>
+                                <pre >{data.RCP_PARTS_DTLS}</pre>
+                            </div>
+                        </ListGroup.Item>
+                    </ListGroup>
+                    )
+                })
+            }
         </div>
     )
-
 }
+
+
 
 
 

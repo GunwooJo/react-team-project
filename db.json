@@ -178,7 +178,21 @@
       "id": 2,
       "RCP_NM": "아메리카노",
       "RCP_PARTS_DTLS": "원두"
-      
+    },
+    {
+      "RCP_NM": "test1",
+      "RCP_PARTS_DTLS": "test1",
+      "id": 3
+    },
+    {
+      "RCP_NM": "test12",
+      "RCP_PARTS_DTLS": "asdfsdf\nasfdasfsad\nsdfasfas",
+      "id": 4
+    },
+    {
+      "RCP_NM": "간장 계란밥",
+      "RCP_PARTS_DTLS": "1. 계란 2개를 후라이를 해줍니다. 간장을 넣어서 간을 맞출 거라서 소금은 넣지 않았어요.\n\n2.밥이랑 볶다 보면 익으니 완전히 다 익히지는 않고 주걱으로 대충대충 잘라둡니다.\n\n3. 계란은 옆으로 밀어두고 밥을 넣어줍니다.\n\n4. 계란이랑 섞어서 비벼줍니다.",
+      "id": 5
     }
   ]
 }
