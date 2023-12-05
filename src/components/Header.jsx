@@ -7,6 +7,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { InputGroup } from 'react-bootstrap';
+import free_icon_recipe_book from '../assets/free_icon_recipe_book.png';
 
 function Header() {
   const [dropdownTitle, setDropdownTitle] = useState('이름');
@@ -21,7 +22,7 @@ function Header() {
       <Container fluid>
 
         <Navbar.Brand href="/" style={{ display: 'flex' }}>
-          <img src="free_icon_recipe_book.png" style={{ width: '30px', marginRight: '5px' }} alt='메인로고' />
+          <img src={free_icon_recipe_book} style={{ width: '30px', marginRight: '5px' }} alt='메인로고' />
           <span>오늘의 레시피</span>
         </Navbar.Brand>
 
