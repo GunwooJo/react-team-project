@@ -2,6 +2,7 @@ import axios from "axios";
 import {React,useEffect,useState} from "react";   
 import Badge from 'react-bootstrap/Badge';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Header from "../components/Header";
 
 
 function UserRecipeListPage(){
@@ -23,6 +24,7 @@ useEffect(()=>{
 
     return(
         <div>
+            <Header/>
             {
                    recipeData.map((data,index)=>{
                     return(
