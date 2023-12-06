@@ -1,18 +1,25 @@
 import { React, useState, useRef, useEffect } from 'react'
 import { Card, Row } from 'react-bootstrap'
 import { serviceDB } from '../constants/apidata';
-
+import { LoadingIndicator } from './LoadingIndicator';
 function Carousel() {
     useEffect(v => {
-        serviceDB.getRandomData("Carousel", {
-            callback: (res) => {
-                console.log(res);
-                if (res) {
-                    let data = res.row || [];
-                    setCardData(data);
+        //localStorage에 저장
+        let data = JSON.parse(localStorage.getItem('carouselData'));
+        if (!data) {
+            serviceDB.getRandomData("Carousel", {
+                callback: (res) => {
+                    console.log(res);
+                    if (res) {
+                        data = res.row || [];
+                        localStorage.setItem('carouselData', JSON.stringify(res));
+                        setCardData(data);
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            setCardData(data.row);
+        }
     }, []);
 
     const [cardData, setCardData] = useState([
@@ -369,17 +376,17 @@ function Carousel() {
                             />
                             <Card.Body>
                                 <Card.Title style={{
-                                     textOverflow: "ellipsis",
-                                     whiteSpace: "nowrap",
-                                     overflow: "hidden",
+                                    textOverflow: "ellipsis",
+                                    whiteSpace: "nowrap",
+                                    overflow: "hidden",
                                 }}>{v["RCP_NM"]}</Card.Title>
                                 <Card.Text style={{
                                     textOverflow: "ellipsis",
                                     wordBreak: "breakWord",
                                     overflow: "hidden",
                                     display: "-webkit-box",
-                                    "-webkit-line-clamp": "3",
-                                    "-webkit-box-orient": "vertical"
+                                    "WebkitLineClamp": "3",
+                                    "WebkitBoxOrient": "vertical"
                                 }}>{v["RCP_NA_TIP"]}</Card.Text>
                             </Card.Body>
                         </Card>)
@@ -388,6 +395,7 @@ function Carousel() {
 
             <div onClick={() => moveCard(1)}
                 style={{ fontSize: "50px", position: "absolute", zIndex: 10, right: "-85px", top: "50%", transform: "translateY(-50%)", cursor: "pointer" }}>〉</div>
+            <LoadingIndicator/>
         </div>
 
     )

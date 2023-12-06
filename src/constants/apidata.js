@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { trackPromise } from 'react-promise-tracker';
 export const APIKEY = '419cf02bcbf849288b6f';
 export const SERVICEID = 'COOKRCP01';
 export const FOOD_SAFETY_KOREA_URL = `http://openapi.foodsafetykorea.go.kr/api/${APIKEY}/${SERVICEID}/json`;
@@ -12,14 +13,17 @@ const headerMenu = {
     "날짜": "CHNG_DT", //(YYYYMMDD)  X
 };
 export const serviceDB = {
+    
     getRandomData: (channel, param) => {
         // 0~ 995번째 레시피까지 랜덤값 5개 가져오기
         let randNum = Math.floor(Math.random()*995)+1;
-        axios.get(`${FOOD_SAFETY_KOREA_URL}/${randNum}/${randNum+4}`).then(res => {
+        trackPromise(axios.get(`${FOOD_SAFETY_KOREA_URL}/${randNum}/${randNum+4}`).then(res => {
             if (param.callback) {
                 param.callback(res.data["COOKRCP01"]);
             }
-        });
+        }).catch((err) => {
+            console.log(err)
+        }));
     },
 
     findDataToSearch: (channel, param) => {
@@ -27,7 +31,7 @@ export const serviceDB = {
         let sendVal = param.val.trim();
         let nameToSearchCode = Object.values(headerMenu)[Object.keys(headerMenu).findIndex((v) => v == param.title)]; // RCP_NM, RCP_WAY2 ...
 
-        axios.get(`${FOOD_SAFETY_KOREA_URL}/1/1000/${nameToSearchCode}=${sendVal}`).then(res => {
+        trackPromise(axios.get(`${FOOD_SAFETY_KOREA_URL}/1/1000/${nameToSearchCode}=${sendVal}`).then(res => {
             if (param.callback) {
                 // 조리방식 검색으론 필터링이 안됨
                 // 여기서 필터링 함
@@ -38,12 +42,14 @@ export const serviceDB = {
                 }
                 param.callback(dataArr);
             }
-        });
+        }).catch((err) => {
+            console.log(err)
+        }));
     },
 
     getAllData: async (param) => {
       try {
-        const response = await axios.get(`${FOOD_SAFETY_KOREA_URL}/1/1000`);
+        const response =  await trackPromise(axios.get(`${FOOD_SAFETY_KOREA_URL}/1/1000`).catch((err) =>  console.log(err)));
 
         if(param.callback)
           param.callback(response.data.COOKRCP01);
