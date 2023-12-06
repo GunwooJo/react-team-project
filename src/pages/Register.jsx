@@ -1,6 +1,7 @@
 import {React, useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Header from '../components/Header';
 
 function Register() {
 
@@ -82,6 +83,7 @@ function Register() {
 
   return (
     <div>
+      <Header/>
       <h4>회원가입</h4>
       <Form style={{width: '70vw'}}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
