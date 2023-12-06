@@ -41,7 +41,7 @@ function RecipeCategory() {
       {
         foodCategoryList.map((foodCategoryObj, idx) => {
           return (
-            <div style={{ marginRight: '30px', cursor: 'pointer', paddingTop: '28px' }} onClick={handleRouting}>
+            <div style={{ marginRight: '30px', cursor: 'pointer', paddingTop: '28px' }} onClick={handleRouting} key={foodCategoryObj.RCP_PAT2}>
               {/* 음식사진과 카테고리 제목 */}
               <img src={ foodCategoryObj.imageUrl } alt='음식사진' style={{ borderRadius: '70%', width: '90px', height: '90px' }}/>
               <div style={{ textAlign: 'center', marginTop: '5px' }}>{ foodCategoryObj.RCP_PAT2 }</div>
