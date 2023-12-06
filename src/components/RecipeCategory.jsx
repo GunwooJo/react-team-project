@@ -5,24 +5,28 @@ function RecipeCategory() {
 
   const foodCategoryList = [
     {
-      title: '샘플',
+      RCP_PAT2: '반찬',
+      imageUrl: 'https://www.foodsafetykorea.go.kr/uploadimg/cook/10_00029_1.png'
+    },
+    {
+      RCP_PAT2: '국&찌개',
+      imageUrl: 'http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00276_1.png'
+    },
+    {
+      RCP_PAT2: '후식',
       imageUrl: 'https://www.casenews.co.kr/news/photo/202205/11152_23355_5126.jpg'
     },
     {
-      title: '샘플',
+      RCP_PAT2: '일품',
       imageUrl: 'https://www.casenews.co.kr/news/photo/202205/11152_23355_5126.jpg'
     },
     {
-      title: '샘플',
+      RCP_PAT2: '밥',
       imageUrl: 'https://www.casenews.co.kr/news/photo/202205/11152_23355_5126.jpg'
     },
     {
-      title: '샘플',
-      imageUrl: 'https://www.bhc.co.kr/upload/bhc/menu/%ED%95%AB%ED%9B%84%EB%9D%BC%EC%9D%B4%EB%93%9C-%EC%BD%A4%EB%B3%B4_410x271.png'
-    },
-    {
-      title: '샘플',
-      imageUrl: 'https://www.bhc.co.kr/upload/bhc/menu/%ED%95%AB%ED%9B%84%EB%9D%BC%EC%9D%B4%EB%93%9C-%EC%BD%A4%EB%B3%B4_410x271.png'
+      RCP_PAT2: '기타',
+      imageUrl: 'https://www.casenews.co.kr/news/photo/202205/11152_23355_5126.jpg'
     }
   ]
 
@@ -40,7 +44,7 @@ function RecipeCategory() {
             <div style={{ marginRight: '30px', cursor: 'pointer', paddingTop: '28px' }} onClick={handleRouting}>
               {/* 음식사진과 카테고리 제목 */}
               <img src={ foodCategoryObj.imageUrl } alt='음식사진' style={{ borderRadius: '70%', width: '90px', height: '90px' }}/>
-              <div style={{ textAlign: 'center', marginTop: '5px' }}>{ foodCategoryObj.title }</div>
+              <div style={{ textAlign: 'center', marginTop: '5px' }}>{ foodCategoryObj.RCP_PAT2 }</div>
             </div>
           )
         })

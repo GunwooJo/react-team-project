@@ -19,6 +19,8 @@ function RecipeListPage() {
 
   //페이지 처음 불러올 때 모든 레시피 보여주기.
   useEffect(() => {
+    if(props.state) return;
+
     serviceDB.getAllData({
       callback: (res) => {
         const response = res.row;
