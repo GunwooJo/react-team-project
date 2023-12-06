@@ -20,6 +20,11 @@ function Register() {
     return password.match(passwordRegex);
   }
 
+  const validateConfirmPassword = (password, confirmPassword) => {
+    if(password === confirmPassword) return true;
+    else return false;
+  }
+
   //유효성 검사 후 표시할 메시지.
   const [emailMsg, setEmailMsg] = useState('');
   const [passwordMsg, setPasswordMsg] = useState('');
@@ -48,6 +53,17 @@ function Register() {
     }
   }
 
+  const onChangeConfirmPassword = (e) => {
+    const inputConfirmPassword = e.target.value;
+    setConfirmPassword(inputConfirmPassword);
+
+    if(validateConfirmPassword(password, inputConfirmPassword)) {
+      setConfirmPasswordMsg('비밀번호가 일치해요.');
+    } else {
+      setConfirmPasswordMsg('비밀번호가 일치하지 않아요.');
+    }
+  }
+
   return (
     <div>
       <h4>회원가입</h4>
@@ -65,8 +81,9 @@ function Register() {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>비밀번호 확인</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Label>비밀번호 재입력</Form.Label>
+          <Form.Control type="password" placeholder="Password" onChange={onChangeConfirmPassword} />
+          {confirmPasswordMsg && <div>{confirmPasswordMsg}</div>}
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
