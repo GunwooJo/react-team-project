@@ -14,19 +14,19 @@ function RecipeCategory() {
     },
     {
       RCP_PAT2: '후식',
-      imageUrl: 'https://www.casenews.co.kr/news/photo/202205/11152_23355_5126.jpg'
+      imageUrl: 'http://www.foodsafetykorea.go.kr/uploadimg/20141117/20141117053610_1416213370153.jpg'
     },
     {
       RCP_PAT2: '일품',
-      imageUrl: 'https://www.casenews.co.kr/news/photo/202205/11152_23355_5126.jpg'
+      imageUrl: 'http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00111_1.png'
     },
     {
       RCP_PAT2: '밥',
-      imageUrl: 'https://www.casenews.co.kr/news/photo/202205/11152_23355_5126.jpg'
+      imageUrl: 'http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00124_1.png'
     },
     {
       RCP_PAT2: '기타',
-      imageUrl: 'https://www.casenews.co.kr/news/photo/202205/11152_23355_5126.jpg'
+      imageUrl: 'http://www.foodsafetykorea.go.kr/uploadimg/20210129/20210129012153_1611894113680.jpg'
     }
   ]
 
