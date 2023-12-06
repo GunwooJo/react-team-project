@@ -2,8 +2,12 @@ import {React, useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Header from '../components/Header';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
+
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -81,11 +85,35 @@ function Register() {
     }
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if(!( validateEmail(email) && validatePassword(password) && validateConfirmPassword(password, confirmPassword) && validateNickname(nickname) )) {
+      alert('내용을 형식에 맞게 입력해주세요.');
+      return;
+    }
+
+    try {
+      await axios.post('http://localhost:3001/user', {
+        email: email,
+        password: password,
+        nickname: nickname
+      });
+
+      alert('회원가입 성공.');
+      navigate('/');
+    } catch (error) {
+      alert('회원가입에 실패했어요.');
+      console.error(error);
+    }
+    
+  }
+
   return (
     <div>
       <Header/>
       <h4>회원가입</h4>
-      <Form style={{width: '70vw'}}>
+      <Form style={{width: '70vw'}} onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>이메일</Form.Label>
           <Form.Control type="email" placeholder="example@naver.com" onChange={onChangeEmail} />
