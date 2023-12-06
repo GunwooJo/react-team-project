@@ -25,6 +25,11 @@ function Register() {
     else return false;
   }
 
+  const validateNickname = (nickname) => {
+    const nicknameRegex = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/;
+    return nickname.match(nicknameRegex);
+  }
+
   //유효성 검사 후 표시할 메시지.
   const [emailMsg, setEmailMsg] = useState('');
   const [passwordMsg, setPasswordMsg] = useState('');
@@ -64,6 +69,17 @@ function Register() {
     }
   }
 
+  const onChangeNickname = (e) => {
+    const inputNickname = e.target.value;
+    setNickname(inputNickname);
+
+    if(validateNickname(inputNickname)) {
+      setNicknameMsg('사용 가능한 닉네임이에요.');
+    } else {
+      setNicknameMsg('닉네임은 2 ~ 16자의 영어 또는 숫자 또는 한글로 지어주세요.');
+    }
+  }
+
   return (
     <div>
       <h4>회원가입</h4>
@@ -88,7 +104,8 @@ function Register() {
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>닉네임</Form.Label>
-          <Form.Control type="text" placeholder="닉네임" />
+          <Form.Control type="text" placeholder="닉네임" onChange={onChangeNickname} />
+          {nicknameMsg && <div>{nicknameMsg}</div>}
         </Form.Group>
 
         <Button variant="primary" type="submit">
