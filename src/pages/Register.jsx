@@ -115,26 +115,26 @@ function Register() {
       <h4>회원가입</h4>
       <Form style={{width: '70vw'}} onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>이메일</Form.Label>
-          <Form.Control type="email" placeholder="example@naver.com" onChange={onChangeEmail} />
+          <Form.Label htmlFor='id'>이메일</Form.Label>
+          <Form.Control id="id" type="email" placeholder="example@naver.com" onChange={onChangeEmail} />
           {emailMsg && <div>{emailMsg}</div>}
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>비밀번호</Form.Label>
-          <Form.Control type="password" placeholder="Password" onChange={onChangePassword} />
+          <Form.Label htmlFor='password'>비밀번호</Form.Label>
+          <Form.Control id='password' type="password" placeholder="Password" onChange={onChangePassword} />
           {passwordMsg && <div>{passwordMsg}</div>}
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>비밀번호 재입력</Form.Label>
-          <Form.Control type="password" placeholder="Password" onChange={onChangeConfirmPassword} />
+          <Form.Label htmlFor='confirm_password'>비밀번호 재입력</Form.Label>
+          <Form.Control id='confirm_password' type="password" placeholder="Password" onChange={onChangeConfirmPassword} />
           {confirmPasswordMsg && <div>{confirmPasswordMsg}</div>}
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>닉네임</Form.Label>
-          <Form.Control type="text" placeholder="닉네임" onChange={onChangeNickname} />
+          <Form.Label htmlFor='nickname'>닉네임</Form.Label>
+          <Form.Control id='nickname' type="text" placeholder="닉네임" onChange={onChangeNickname} />
           {nicknameMsg && <div>{nicknameMsg}</div>}
         </Form.Group>
 
