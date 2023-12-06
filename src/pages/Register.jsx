@@ -12,14 +12,13 @@ function Register() {
   //이메일 유효성 검사.
   const validateEmail = (email) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return email.toLowerCase().match(emailRegex);
+    return email.match(emailRegex);
   }
 
-  //유효성 검사 결과를 담는 변수.
-  const isEmailValid = validateEmail(email);
-  // const isPasswordValid = validatePassword(password);
-  // const isConfirmPasswordValid = password === confirmPassword;
-  // const isNicknameValid = validateNickname(nickname);
+  const validatePassword = (password) => {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+    return password.match(passwordRegex);
+  }
 
   //유효성 검사 후 표시할 메시지.
   const [emailMsg, setEmailMsg] = useState('');
@@ -31,10 +30,21 @@ function Register() {
     const inputEmail = e.target.value;
     setEmail(inputEmail);
 
-    if(isEmailValid) {
+    if(validateEmail(inputEmail)) {
       setEmailMsg('올바른 이메일 형식이에요!');
     } else {
       setEmailMsg('이메일 형식에 맞게 입력해주세요.');
+    }
+  }
+
+  const onChangePassword = (e) => {
+    const inputPassword = e.target.value;
+    setPassword(inputPassword);
+
+    if(validatePassword(inputPassword)) {
+      setPasswordMsg('사용 가능한 비밀번호예요!');
+    } else {
+      setPasswordMsg('비밀번호는 영문 대문자, 소문자, 숫자, 특수문자를 포함하여 8 ~ 20자로 만들어주세요.');
     }
   }
 
@@ -50,7 +60,8 @@ function Register() {
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>비밀번호</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control type="password" placeholder="Password" onChange={onChangePassword} />
+          {passwordMsg && <div>{passwordMsg}</div>}
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
