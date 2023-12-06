@@ -7,6 +7,7 @@ import RecipeListPage from "./pages/RecipeListPage";
 import RecipeDetailPage from "./pages/RecipeDetailPage";
 import AddRecipe from "./components/AddRecipe";
 import UserRecipeListPage from "./pages/UserRecipeListPage";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/recipe/:RCP_NM' element={<RecipeDetailPage/>}/>
           <Route path='/recipe/addUserRecipe' element={<AddRecipe/>}/>
           <Route path='/recipe/UserRecipeList' element={<UserRecipeListPage/>}/>
+          <Route path='/user/register' element={<Register/>}/>
         </Routes>
       </BrowserRouter>
 
