@@ -171,13 +171,28 @@
   "addRecipe": [
     {
       "id": 1,
-      "title": "김치 찌개",
-      "des": "김치"
+      "RCP_NM": "김치 찌개",
+      "RCP_PARTS_DTLS": "김치"
     },
     {
-      "title": "아메리카노",
-      "des": "원두",
-      "id": 2
+      "id": 2,
+      "RCP_NM": "아메리카노",
+      "RCP_PARTS_DTLS": "원두"
+    },
+    {
+      "RCP_NM": "ㅁㄴㅇㄹ",
+      "RCP_PARTS_DTLS": "ㅁㄴㅇㄹ",
+      "id": 6
+    },
+    {
+      "RCP_NM": "테스트2145",
+      "RCP_PARTS_DTLS": "안녕하세요",
+      "id": 7
+    },
+    {
+      "RCP_NM": "테스트2145",
+      "RCP_PARTS_DTLS": "안녕하세요",
+      "id": 8
     }
   ]
 }
