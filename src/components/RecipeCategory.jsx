@@ -1,7 +1,11 @@
 import React from 'react'
+import { serviceDB } from '../constants/apidata';
+import { useNavigate } from 'react-router-dom';
 
 //메인페이지 중간에 위치할 레시 분류 슬라이드.
 function RecipeCategory() {
+
+  const navigate = useNavigate();
 
   const foodCategoryList = [
     {
@@ -9,7 +13,7 @@ function RecipeCategory() {
       imageUrl: 'https://www.foodsafetykorea.go.kr/uploadimg/cook/10_00029_1.png'
     },
     {
-      RCP_PAT2: '국&찌개',
+      RCP_PAT2: '찌개',
       imageUrl: 'http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00276_1.png'
     },
     {
@@ -30,9 +34,14 @@ function RecipeCategory() {
     }
   ]
 
-  // 카테고리를 클릭했을 때 작동할 기능.
-  const handleRouting = () => {
-    alert('해당 카테고리에 속하는 음식들 보여주는 페이지로 이동.(추후 구현)');
+  // 해당 카테고리의 레시피 리스트 페이지로 이동.
+  const handleRouting = (RCP_PAT2) => {
+    serviceDB.findDataToSearch("Header", {
+      val: RCP_PAT2,
+      title: '요리종류',
+      callback: (res) => {
+        navigate('/recipe/list', {state: { data: res }});
+    }});
   }
 
   return (
@@ -41,7 +50,7 @@ function RecipeCategory() {
       {
         foodCategoryList.map((foodCategoryObj, idx) => {
           return (
-            <div style={{ marginRight: '30px', cursor: 'pointer', paddingTop: '28px' }} onClick={handleRouting} key={foodCategoryObj.RCP_PAT2}>
+            <div style={{ marginRight: '30px', cursor: 'pointer', paddingTop: '28px' }} onClick={()=>handleRouting(foodCategoryObj.RCP_PAT2)} key={foodCategoryObj.RCP_PAT2}>
               {/* 음식사진과 카테고리 제목 */}
               <img src={ foodCategoryObj.imageUrl } alt='음식사진' style={{ borderRadius: '70%', width: '90px', height: '90px' }}/>
               <div style={{ textAlign: 'center', marginTop: '5px' }}>{ foodCategoryObj.RCP_PAT2 }</div>
