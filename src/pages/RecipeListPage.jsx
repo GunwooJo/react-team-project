@@ -3,6 +3,7 @@ import Pagination from 'react-bootstrap/Pagination';
 import Header from '../components/Header';
 import { useLocation } from "react-router-dom";
 import { serviceDB } from '../constants/apidata';
+import { LoadingIndicator } from '../components/LoadingIndicator';
 
 function RecipeListPage() {
   // 값 보내면 state로 들어옴.
@@ -28,7 +29,7 @@ function RecipeListPage() {
       }
     });
   }, [])
-  
+
   const numOfItemsPerPage = 8;
   const totalNumOfPages = Math.ceil(totalRecipeDataList.length / numOfItemsPerPage); //해당 소수보다 크거나 같은 정수 반환. ex) 1.2 -> 2
 
@@ -106,33 +107,34 @@ function RecipeListPage() {
           }
         }
         return <>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0px 30px', margin: '0 15vw', height: '70vh' }} >
-          {
-            currentPageRecipeList.map(recipeObj => {
-              return (
-                <div style={{ textAlign: 'center', cursor: 'pointer' }} onClick={handleRouting} >
-                  <img src={recipeObj.ATT_FILE_NO_MK} style={{ width: '200px', height: '200px' }} alt='레시피 이미지' />
-                  <div style={{ color: '#555555' }}>{recipeObj.RCP_PAT2}</div>
-                  <b>{recipeObj.RCP_NM}</b>
-                  <div style={{ color: '#555555' }}>{recipeObj.RCP_WAY2}{' '}{recipeObj.INFO_ENG}kcal</div>
-                </div>
-              )
-            })
-          }
-        </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0px 30px', margin: '0 15vw', height: '70vh' }} >
+            {
+              currentPageRecipeList.map(recipeObj => {
+                return (
+                  <div style={{ textAlign: 'center', cursor: 'pointer' }} onClick={handleRouting} >
+                    <img src={recipeObj.ATT_FILE_NO_MK} style={{ width: '200px', height: '200px' }} alt='레시피 이미지' />
+                    <div style={{ color: '#555555' }}>{recipeObj.RCP_PAT2}</div>
+                    <b>{recipeObj.RCP_NM}</b>
+                    <div style={{ color: '#555555' }}>{recipeObj.RCP_WAY2}{' '}{recipeObj.INFO_ENG}kcal</div>
+                  </div>
+                )
+              })
+            }
+          </div>
 
-        {/* 페이지번호 ui */}
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Pagination>
-            <Pagination.Prev onClick={handlePreviousPage} disabled={currentPageNum === 1} />
-            {currentRange > 1 && <Pagination.Item onClick={handlePreviousRange}>...</Pagination.Item>}
-            {items}
-            {currentRange < totalRanges && <Pagination.Item onClick={handleNextRange}>...</Pagination.Item>}
-            <Pagination.Next onClick={handleNextPage} disabled={currentPageNum === totalNumOfPages} />
-          </Pagination>
-        </div>
-      </>;
+          {/* 페이지번호 ui */}
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Pagination>
+              <Pagination.Prev onClick={handlePreviousPage} disabled={currentPageNum === 1} />
+              {currentRange > 1 && <Pagination.Item onClick={handlePreviousRange}>...</Pagination.Item>}
+              {items}
+              {currentRange < totalRanges && <Pagination.Item onClick={handleNextRange}>...</Pagination.Item>}
+              <Pagination.Next onClick={handleNextPage} disabled={currentPageNum === totalNumOfPages} />
+            </Pagination>
+          </div>
+        </>;
       })()}
+      <LoadingIndicator/>
     </>
   )
 }
