@@ -12,6 +12,7 @@ const headerMenu = {
     "날짜": "CHNG_DT", //(YYYYMMDD)  X
 };
 export const serviceDB = {
+    
     getRandomData: (channel, param) => {
         // 0~ 995번째 레시피까지 랜덤값 5개 가져오기
         let randNum = Math.floor(Math.random()*995)+1;

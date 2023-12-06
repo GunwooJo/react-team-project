@@ -4,15 +4,22 @@ import { serviceDB } from '../constants/apidata';
 
 function Carousel() {
     useEffect(v => {
-        serviceDB.getRandomData("Carousel", {
-            callback: (res) => {
-                console.log(res);
-                if (res) {
-                    let data = res.row || [];
-                    setCardData(data);
+        //localStorage에 저장
+        let data = JSON.parse(localStorage.getItem('carouselData'));
+        if (!data) {
+            serviceDB.getRandomData("Carousel", {
+                callback: (res) => {
+                    console.log(res);
+                    if (res) {
+                        data = res.row || [];
+                        localStorage.setItem('carouselData', JSON.stringify(res));
+                        setCardData(data);
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            setCardData(data.row);
+        }
     }, []);
 
     const [cardData, setCardData] = useState([
@@ -369,9 +376,9 @@ function Carousel() {
                             />
                             <Card.Body>
                                 <Card.Title style={{
-                                     textOverflow: "ellipsis",
-                                     whiteSpace: "nowrap",
-                                     overflow: "hidden",
+                                    textOverflow: "ellipsis",
+                                    whiteSpace: "nowrap",
+                                    overflow: "hidden",
                                 }}>{v["RCP_NM"]}</Card.Title>
                                 <Card.Text style={{
                                     textOverflow: "ellipsis",
