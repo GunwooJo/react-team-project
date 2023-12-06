@@ -3,8 +3,8 @@ import { React, useState } from 'react';
 
 function Footer() {
   return (
-   <div style={{width:"100%", height:"120px", backgroundColor:"#d9d9d9", position:"absolute", bottom:"0"}}>
-    <p style={{textAlign:"center", paddingTop:"80px"}}>Copyright KNU Student Inc. All Rights Reserved</p>
+   <div style={{width:"100%", height:"90px", backgroundColor:"rgb(47, 47, 47)", position:"absolute", bottom:"0"}}>
+    <p style={{textAlign:"center", paddingTop:"55px", color:"#fff", fontSize:"14px"}}>Copyright KNU Student Inc. All Rights Reserved</p>
    </div>
   )
 }

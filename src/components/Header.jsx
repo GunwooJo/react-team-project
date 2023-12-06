@@ -31,6 +31,12 @@ function Header() {
     }});
   }
 
+  const handleOnKeyPress = e => {
+    if (e.key === 'Enter') {
+      searchEvent(); // Enter 입력이 되면 클릭 이벤트 실행
+    }
+  };
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
@@ -57,13 +63,17 @@ function Header() {
           </Nav>
 
           <Form className="d-flex">
+            {/* 엔터 이벤트에서 새로고침 발생 
+             => form에 input 하나만 존재해서 => 한개더 추가 후 안보이게*/}
+            <input type="text" style={{display:"none"}}/>
             <InputGroup>
               <Form.Control
                 aria-label="Text input with dropdown button"
                 type="search"
                 placeholder="레시피 검색"
                 ref={inpRef}
-                htmlSize={80} />
+                htmlSize={80} 
+                onKeyPress={handleOnKeyPress}/>
 
               <DropdownButton
                 variant="outline-secondary"
