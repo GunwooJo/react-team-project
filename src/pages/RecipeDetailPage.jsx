@@ -3,9 +3,11 @@ import axios from 'axios';
 import { FOOD_SAFETY_KOREA_URL } from '../constants/apidata';
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
+import { useNavigate } from 'react-router-dom';
 
 function RecipeDetailPage() {
 
+  const navigate = useNavigate();
   const { RCP_NM } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [manualList, setManualList] = useState([]);
@@ -60,6 +62,11 @@ function RecipeDetailPage() {
   }
 
   useEffect(() => {
+    if(!localStorage.getItem('userData')) {
+      alert('로그인 후 이용해주세요!');
+      navigate('/user/login');
+      return;
+    }
     fetchRecipeData();
   }, [])
 
