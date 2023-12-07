@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import bcrypt from "bcryptjs-react";
+import Footer from '../components/Footer';
 
 function Register() {
 
@@ -119,36 +120,39 @@ function Register() {
   return (
     <div>
       <Header/>
-      <h4>회원가입</h4>
-      <Form style={{width: '70vw'}} onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label htmlFor='id'>이메일</Form.Label>
-          <Form.Control id="id" type="email" placeholder="example@naver.com" onChange={onChangeEmail} />
-          {emailMsg && <div>{emailMsg}</div>}
-        </Form.Group>
+      <div style={{width: '70vw', margin: '0 auto'}}>
+        <h4 style={{textAlign: 'center', margin: '50px 0'}}>회원가입</h4>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label htmlFor='id'>이메일</Form.Label>
+            <Form.Control id="id" type="email" placeholder="example@naver.com" onChange={onChangeEmail} />
+            {emailMsg && <div>{emailMsg}</div>}
+          </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label htmlFor='password'>비밀번호</Form.Label>
-          <Form.Control id='password' type="password" placeholder="Password" onChange={onChangePassword} />
-          {passwordMsg && <div>{passwordMsg}</div>}
-        </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label htmlFor='password'>비밀번호</Form.Label>
+            <Form.Control id='password' type="password" placeholder="Password" onChange={onChangePassword} />
+            {passwordMsg && <div>{passwordMsg}</div>}
+          </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label htmlFor='confirm_password'>비밀번호 재입력</Form.Label>
-          <Form.Control id='confirm_password' type="password" placeholder="Password" onChange={onChangeConfirmPassword} />
-          {confirmPasswordMsg && <div>{confirmPasswordMsg}</div>}
-        </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label htmlFor='confirm_password'>비밀번호 재입력</Form.Label>
+            <Form.Control id='confirm_password' type="password" placeholder="Password" onChange={onChangeConfirmPassword} />
+            {confirmPasswordMsg && <div>{confirmPasswordMsg}</div>}
+          </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label htmlFor='nickname'>닉네임</Form.Label>
-          <Form.Control id='nickname' type="text" placeholder="닉네임" onChange={onChangeNickname} />
-          {nicknameMsg && <div>{nicknameMsg}</div>}
-        </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label htmlFor='nickname'>닉네임</Form.Label>
+            <Form.Control id='nickname' type="text" placeholder="닉네임" onChange={onChangeNickname} />
+            {nicknameMsg && <div>{nicknameMsg}</div>}
+          </Form.Group>
 
-        <Button variant="primary" type="submit">
-          회원가입
-        </Button>
-      </Form>
+          <Button variant="primary" type="submit">
+            회원가입
+          </Button>
+        </Form>
+      </div>
+      <Footer/>
     </div>
   )
 }
