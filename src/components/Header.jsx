@@ -56,8 +56,6 @@ function Header() {
             navbarScroll
           >
             <Nav.Link href="/recipe/list">둘러보기</Nav.Link>
-            <Nav.Link href="#action2">레시피</Nav.Link>
-            <Nav.Link href="#action3">키친가이드</Nav.Link>
             <Nav.Link href="/recipe/addUserRecipe">레시피등록</Nav.Link>
             <Nav.Link href="/recipe/UserRecipeList">유저들의 레시피</Nav.Link>
           </Nav>
