@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 function UserRecipeListPage() {
     const [recipeData, setrecipeData] = useState([]);
     const navigate=useNavigate();
+    const user=JSON.parse(localStorage.getItem('userData'));
     const deleteHandle=(id)=>{
         axios
         .delete('http://localhost:3001/addRecipe/'+id)
@@ -46,6 +47,8 @@ function UserRecipeListPage() {
                         <ListGroup key={data.id} as="ol">
                             <ListGroup.Item as="li" className="d-flex justify-content-between align-items-start">
                                 <div className="ms-2 me-auto">
+                                    <div>작성자 : {user.nickname}</div>
+                                    <br />
                                     <div>{data.RCP_NM}</div>
                                     <pre>{data.RCP_PARTS_DTLS}</pre>
                                 </div>
