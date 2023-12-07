@@ -8,6 +8,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { InputGroup } from 'react-bootstrap';
 import free_icon_recipe_book from '../assets/free_icon_recipe_book.png';
+import free_icon_user_profile from '../assets/free-icon-user-profile-4803050.png';
 import { serviceDB } from '../constants/apidata';
 import { useNavigate } from 'react-router-dom';
 
@@ -58,6 +59,7 @@ function Header() {
             <Nav.Link href="/recipe/list">둘러보기</Nav.Link>
             <Nav.Link href="/recipe/addUserRecipe">레시피등록</Nav.Link>
             <Nav.Link href="/recipe/UserRecipeList">유저들의 레시피</Nav.Link>
+            <Nav.Link href="/user/login"><img style={{width: '30px'}} src={free_icon_user_profile} /></Nav.Link>
           </Nav>
 
           <Form className="d-flex">
