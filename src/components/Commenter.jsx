@@ -1,14 +1,16 @@
 import axios from 'axios';
 import { React, useEffect, useState } from 'react';
 import { Button, Form, ListGroup } from 'react-bootstrap';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 
-const Commenter = ({recipeObj}) => {
+const Commenter = ({ recipeObj }) => {
+    const navigate = useNavigate();
+    
     const [commentMsg, setCommentMsg] = useState('');
     const [commentList, setCommentList] = useState([]);
 
-    const {RCP_NM, RCP_SEQ} = recipeObj;
+    const { RCP_NM, RCP_SEQ } = recipeObj;
     const elapsedTime = (date) => {
         const start = new Date(date);
         const end = new Date();
@@ -26,17 +28,27 @@ const Commenter = ({recipeObj}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const user = JSON.parse(localStorage.getItem('userData'));
+        if (!localStorage.getItem('userData')) {
+            alert('로그인 후 이용해주세요!');
+            navigate('/user/login');
+            return;
+        } else if(commentMsg.trim() == "") {
+            alert('내용을 입력해주세요.');
+        }
+
         try {
             let item = {
                 RCP_NM,
                 RCP_SEQ,
-                "email": "sample email",
-                "nickname": "sample nickname",
-                "content": commentMsg,
+                "email": user.email,
+                "nickname": user.nickname,
+                "userId": user.id,
+                "content": commentMsg.trim(),
                 "tm": new Date().toISOString()
             };
             await axios.post('http://localhost:3001/comment', item);
-            setCommentList([ ...[item], ...commentList])
+            setCommentList([...[item], ...commentList])
             alert('입력 성공');
         } catch (error) {
             alert('입력 실패');
@@ -45,13 +57,13 @@ const Commenter = ({recipeObj}) => {
     }
 
     const fetchAll = async () => {
-        console.log(RCP_NM , RCP_SEQ);
-        if (RCP_NM && RCP_SEQ) { 
+        console.log(RCP_NM, RCP_SEQ);
+        if (RCP_NM && RCP_SEQ) {
             try {
-            let cmt = await axios.get(`http://localhost:3001/comment?RCP_NM=${RCP_NM}&RCP_SEQ=${RCP_SEQ}`);
-            cmt.data.sort((a,b) => new Date(b.tm).getTime() - new Date(a.tm).getTime());
-            setCommentList(cmt.data);
-            console.log(cmt.data);
+                let cmt = await axios.get(`http://localhost:3001/comment?RCP_NM=${RCP_NM}&RCP_SEQ=${RCP_SEQ}`);
+                cmt.data.sort((a, b) => new Date(b.tm).getTime() - new Date(a.tm).getTime());
+                setCommentList(cmt.data);
+                console.log(cmt.data);
             }
             catch (error) {
                 alert('입력 실패');
@@ -80,12 +92,12 @@ const Commenter = ({recipeObj}) => {
                 <p>댓글 목록</p>
                 <ListGroup style={{ maxWidth: "900px" }}>
                     {
-                        commentList.map((v,i) => 
+                        commentList.map((v, i) =>
                             <ListGroup.Item key={i}>
                                 <h5>{v.nickname}</h5>
                                 <span>{elapsedTime(v.tm)}</span>
                                 <p>
-                                   {v.content}
+                                    {v.content}
                                 </p>
                             </ListGroup.Item>
                         )
