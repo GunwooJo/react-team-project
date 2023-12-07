@@ -3,10 +3,11 @@ import { React, useEffect, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Header from "../components/Header";
+import { useNavigate } from 'react-router-dom';
 
 function UserRecipeListPage() {
     const [recipeData, setrecipeData] = useState([]);
-
+    const navigate=useNavigate();
     const deleteHandle=(id)=>{
         axios
         .delete('http://localhost:3001/addRecipe/'+id)
@@ -28,6 +29,11 @@ function UserRecipeListPage() {
     }
 
     useEffect(() => {
+        if(!localStorage.getItem('userData')){
+            alert('로그인 후 이용해주세요!');
+            navigate('/user/login');
+            return;
+        }
         fetchRecipeData();
     }, [])
 

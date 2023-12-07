@@ -1,12 +1,14 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Header from "./Header";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const AddRecipe =()=>{
     const [title,setTitle] = useState('');
     const [des,setDes] = useState('');
+    const navigate=useNavigate();
 
     const handleSubmit = (e) =>{
         e.preventDefault(); //페이지 이동하지 않게 해주기 위해 사용
@@ -22,6 +24,14 @@ const AddRecipe =()=>{
 
         
     }
+
+    useEffect(()=>{
+        if(!localStorage.getItem('userData')){
+            alert('로그인 후 이용해주세요!');
+            navigate('/user/login');
+            return;
+        }
+    })
 
     return(
         <div>
