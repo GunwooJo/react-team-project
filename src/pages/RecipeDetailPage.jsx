@@ -1,12 +1,16 @@
 import { React, useEffect, useState } from 'react';
 import axios from 'axios';
 import { FOOD_SAFETY_KOREA_URL } from '../constants/apidata';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Header from '../components/Header';
-
+import { Button, Form, ListGroup } from 'react-bootstrap';
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
+import Footer from '../components/Footer';
+import Commenter from '../components/Commenter';
 function RecipeDetailPage() {
   // 값 보내면 state로 들어옴.
   const props = useLocation();
+  const navigate = useNavigate();
 
   const { RCP_NM } = useParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -19,15 +23,18 @@ function RecipeDetailPage() {
       let recipeData = null;
       if (props.state) {
         recipeData = props.state.data || {};
+        console.log(recipeData);
       } else {
         const response = await axios.get(`${FOOD_SAFETY_KOREA_URL}/1/1000/RCP_NM=${RCP_NM}`);
         recipeData = response.data.COOKRCP01.row[0];
       }
       
+      console.log(recipeData);
 
-      setRecipeObj(recipeData);
       makeManualList(recipeData);
       makeManualImgList(recipeData);
+      setRecipeObj(recipeData);
+    
 
     } catch (error) {
       alert('오류가 발생했어요. 잠시 후 다시 시도해주세요.');
@@ -37,6 +44,7 @@ function RecipeDetailPage() {
     }
   }
 
+ 
   //manualList에 메뉴얼 내용 배열로 담기.
   const makeManualList = (recipeObj) => {
     if (!recipeObj) throw Error('인자 없음.');
@@ -68,7 +76,7 @@ function RecipeDetailPage() {
   }
 
   useEffect(() => {
-    fetchRecipeData();
+    setTimeout(() => fetchRecipeData(), 50);
   }, [])
 
   return (
@@ -108,7 +116,9 @@ function RecipeDetailPage() {
           })
         }
 
+        <Commenter recipeObj={recipeObj}/>
       </div>
+      <Footer />
     </>
   )
 }

@@ -11,7 +11,7 @@ function MainPage() {
       <Header/>
       <Carousel/>
       <RecipeCategory/>
-      <Footer/>
+      <div style={{width:"100%",position:"absolute", bottom:"0"}}><Footer/></div>
     </>
   )
 }
