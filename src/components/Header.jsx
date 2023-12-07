@@ -46,6 +46,12 @@ function Header() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('userData');
+    setLogginedUserData(null);
+    alert('로그아웃 되었어요!');
+  }
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
@@ -69,7 +75,7 @@ function Header() {
             <Nav.Link href="/recipe/UserRecipeList">유저들의 레시피</Nav.Link>
             { !logginedUserData && <Nav.Link href="/user/login"><img style={{width: '30px'}} src={free_icon_user_profile} /></Nav.Link>}
           </Nav>
-
+          { logginedUserData && <Button style={{marginRight: '10px'}} variant='outline-secondary' onClick={handleLogout}>로그아웃</Button> }
           <Form className="d-flex">
             {/* 엔터 이벤트에서 새로고침 발생 
              => form에 input 하나만 존재해서 => 한개더 추가 후 안보이게*/}

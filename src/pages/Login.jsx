@@ -26,7 +26,6 @@ function Login() {
       bcrypt.compare(password, passwordFromDB)
       .then((res) => {
         if(res === true) {
-          alert('로그인 성공');
           navigate('/');
           localStorage.setItem('userData', JSON.stringify({
             email: emailFromDB,
