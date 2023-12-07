@@ -19,12 +19,20 @@ function Login() {
     try {
       const response = await axios.get(`http://localhost:3001/user?email=${email}`);
       const passwordFromDB = response.data[0].password;
+      const emailFromDB = response.data[0].email;
+      const nicknameFromDB = response.data[0].nickname;
+      const idFromDB = response.data[0].id;
 
       bcrypt.compare(password, passwordFromDB)
       .then((res) => {
         if(res === true) {
           alert('로그인 성공');
           navigate('/');
+          localStorage.setItem('userData', JSON.stringify({
+            email: emailFromDB,
+            nickname: nicknameFromDB,
+            id: idFromDB
+          }));
         } else {
           alert('아이디나 비밀번호가 틀렸어요.');
         }
