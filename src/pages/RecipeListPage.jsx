@@ -1,13 +1,14 @@
 import { React, useState, useEffect } from 'react'
 import Pagination from 'react-bootstrap/Pagination';
 import Header from '../components/Header';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { serviceDB } from '../constants/apidata';
 import { LoadingIndicator } from '../components/LoadingIndicator';
 
 function RecipeListPage() {
   // 값 보내면 state로 들어옴.
   const props = useLocation();
+  const navigate = useNavigate();
   //totalRecipeDataList 라는 이름의 변수 또는 state에 음식정보 배열을 넣으면 작동합니다.
   const [totalRecipeDataList, setTotalRecipeDataList] = useState([]);
   useEffect(() => {
@@ -67,8 +68,9 @@ function RecipeListPage() {
     setCurrentRange(prev => Math.max(prev - 1, 1));
   };
 
-  const handleRouting = () => {
-    alert('레시피 상세페이지로 이동!(추후 구현)');
+  const handleRouting = (recipeObj) => {
+    navigate('/recipe/'+recipeObj.RCP_NM, {state: { data: recipeObj }});
+    // alert('레시피 상세페이지로 이동!(추후 구현)');
   }
 
   const items = [];
@@ -111,7 +113,7 @@ function RecipeListPage() {
             {
               currentPageRecipeList.map(recipeObj => {
                 return (
-                  <div style={{ textAlign: 'center', cursor: 'pointer' }} onClick={handleRouting} >
+                  <div style={{ textAlign: 'center', cursor: 'pointer' }} onClick={() => handleRouting(recipeObj)} >
                     <img src={recipeObj.ATT_FILE_NO_MK} style={{ width: '200px', height: '200px' }} alt='레시피 이미지' />
                     <div style={{ color: '#555555' }}>{recipeObj.RCP_PAT2}</div>
                     <b>{recipeObj.RCP_NM}</b>

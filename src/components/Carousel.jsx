@@ -1,8 +1,10 @@
 import { React, useState, useRef, useEffect } from 'react'
 import { Card, Row } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom';
 import { serviceDB } from '../constants/apidata';
 import { LoadingIndicator } from './LoadingIndicator';
 function Carousel() {
+    const navigate = useNavigate();
     useEffect(v => {
         //localStorage에 저장
         let data = JSON.parse(localStorage.getItem('carouselData'));
@@ -351,6 +353,9 @@ function Carousel() {
         }
     }
 
+    const handleRouting = (recipeObj) => {
+        navigate('/recipe/' + recipeObj.RCP_NM, { state: { data: recipeObj } });
+    }
     return (
         <div style={{ position: "relative", width: "1024px", margin: " 30px auto", height: "395px" }}>
             <div onClick={() => moveCard(0)}
@@ -363,8 +368,9 @@ function Carousel() {
                             height: "318px",
                             left: leftVal[i] + "%",
                             top: topVal[i] + "px",
-                            transform: "translateX(-50%)"
-                        }}>
+                            transform: "translateX(-50%)",
+                            cursor: "pointer"
+                        }} onClick={() => handleRouting(v)}>
                             <div
                                 style={{
                                     width: "286px", height: "180px",
@@ -395,7 +401,7 @@ function Carousel() {
 
             <div onClick={() => moveCard(1)}
                 style={{ fontSize: "50px", position: "absolute", zIndex: 10, right: "-85px", top: "50%", transform: "translateY(-50%)", cursor: "pointer" }}>〉</div>
-            <LoadingIndicator/>
+            <LoadingIndicator />
         </div>
 
     )

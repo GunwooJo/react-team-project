@@ -1,10 +1,12 @@
 import { React, useEffect, useState } from 'react';
 import axios from 'axios';
 import { FOOD_SAFETY_KOREA_URL } from '../constants/apidata';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import Header from '../components/Header';
 
 function RecipeDetailPage() {
+  // 값 보내면 state로 들어옴.
+  const props = useLocation();
 
   const { RCP_NM } = useParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -14,8 +16,14 @@ function RecipeDetailPage() {
 
   const fetchRecipeData = async () => {
     try {
-      const response = await axios.get(`${FOOD_SAFETY_KOREA_URL}/1/1000/RCP_NM=${RCP_NM}`);
-      const recipeData = response.data.COOKRCP01.row[0];
+      let recipeData = null;
+      if (props.state) {
+        recipeData = props.state.data || {};
+      } else {
+        const response = await axios.get(`${FOOD_SAFETY_KOREA_URL}/1/1000/RCP_NM=${RCP_NM}`);
+        recipeData = response.data.COOKRCP01.row[0];
+      }
+      
 
       setRecipeObj(recipeData);
       makeManualList(recipeData);
