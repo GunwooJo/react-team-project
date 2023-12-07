@@ -9,13 +9,15 @@ const AddRecipe =()=>{
     const [title,setTitle] = useState('');
     const [des,setDes] = useState('');
     const navigate=useNavigate();
+    const user=JSON.parse(localStorage.getItem('userData'));
 
     const handleSubmit = (e) =>{
         e.preventDefault(); //페이지 이동하지 않게 해주기 위해 사용
         
         axios.post('http://localhost:3001/addRecipe',{
             RCP_NM: title,
-            RCP_PARTS_DTLS : des
+            RCP_PARTS_DTLS : des,
+            userId : user.id
         }).then(()=>{
             alert('작성되었습니다!');
             setTitle('')
