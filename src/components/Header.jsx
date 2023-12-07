@@ -15,7 +15,15 @@ import { useNavigate } from 'react-router-dom';
 function Header() {
   const navigate = useNavigate();
   const [dropdownTitle, setDropdownTitle] = useState('이름');
+  const [logginedUserData, setLogginedUserData] = useState(null);
   const inpRef = useRef();
+
+  useEffect(() => {
+    if(localStorage.getItem('userData')) {
+      setLogginedUserData(localStorage.getItem('userData'));
+    }
+  }, [])
+
   //검색칸 옆의 드랍다운 버튼을 눌렀을 때 일어날 동작.
   const handleSelectDropdown = (eventKey) => {
     setDropdownTitle(eventKey);
@@ -59,7 +67,7 @@ function Header() {
             <Nav.Link href="/recipe/list">둘러보기</Nav.Link>
             <Nav.Link href="/recipe/addUserRecipe">레시피등록</Nav.Link>
             <Nav.Link href="/recipe/UserRecipeList">유저들의 레시피</Nav.Link>
-            <Nav.Link href="/user/login"><img style={{width: '30px'}} src={free_icon_user_profile} /></Nav.Link>
+            { !logginedUserData && <Nav.Link href="/user/login"><img style={{width: '30px'}} src={free_icon_user_profile} /></Nav.Link>}
           </Nav>
 
           <Form className="d-flex">
