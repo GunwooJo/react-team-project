@@ -7,6 +7,7 @@ import { Button, Form, ListGroup } from 'react-bootstrap';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import Footer from '../components/Footer';
 import Commenter from '../components/Commenter';
+
 function RecipeDetailPage() {
   // 값 보내면 state로 들어옴.
   const props = useLocation();
