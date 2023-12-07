@@ -70,7 +70,7 @@ function Login() {
         </Button>
       </Form>
     </div>
-    <Footer/>
+    <div style={{width:"100%",position:"absolute", bottom:"0"}}><Footer/></div>
     </div>
   )
 }
