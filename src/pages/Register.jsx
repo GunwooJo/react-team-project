@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Header from '../components/Header';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import bcrypt from "bcryptjs-react";
 
 function Register() {
 
@@ -93,19 +94,25 @@ function Register() {
       return;
     }
 
-    try {
-      await axios.post('http://localhost:3001/user', {
-        email: email,
-        password: password,
-        nickname: nickname
-      });
+    //입력한 비밀번호 해시 후 db에 저장 요청.
+    bcrypt.hash(password, 8, async function(err, hash) {
+      if(err) throw Error(err);
+      
+      try {
+        await axios.post('http://localhost:3001/user', {
+          email: email,
+          password: hash,
+          nickname: nickname
+        });
+  
+        alert('회원가입 성공.');
+        navigate('/');
+      } catch (error) {
+        alert('회원가입에 실패했어요.');
+        console.error(error);
+      }
 
-      alert('회원가입 성공.');
-      navigate('/');
-    } catch (error) {
-      alert('회원가입에 실패했어요.');
-      console.error(error);
-    }
+    });
     
   }
 
