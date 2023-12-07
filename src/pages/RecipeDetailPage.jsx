@@ -76,11 +76,6 @@ function RecipeDetailPage() {
   }
 
   useEffect(() => {
-    if(!localStorage.getItem('userData')) {
-      alert('로그인 후 이용해주세요!');
-      navigate('/user/login');
-      return;
-    }
     fetchRecipeData();
   }, [])
 
