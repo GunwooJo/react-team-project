@@ -3,15 +3,21 @@ import axios from 'axios';
 import { FOOD_SAFETY_KOREA_URL } from '../constants/apidata';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Header from '../components/Header';
+<<<<<<< HEAD
 import { Button, Form, ListGroup } from 'react-bootstrap';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import Footer from '../components/Footer';
 import Commenter from '../components/Commenter';
+=======
+import { useNavigate } from 'react-router-dom';
+
+>>>>>>> 1c0af964fa1f2db9000f36bb101e0d5b60fa7552
 function RecipeDetailPage() {
   // 값 보내면 state로 들어옴.
   const props = useLocation();
   const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const { RCP_NM } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [manualList, setManualList] = useState([]);
@@ -76,7 +82,12 @@ function RecipeDetailPage() {
   }
 
   useEffect(() => {
-    setTimeout(() => fetchRecipeData(), 50);
+    if(!localStorage.getItem('userData')) {
+      alert('로그인 후 이용해주세요!');
+      navigate('/user/login');
+      return;
+    }
+    fetchRecipeData();
   }, [])
 
   return (
