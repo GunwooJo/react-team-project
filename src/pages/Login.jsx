@@ -26,7 +26,6 @@ function Login() {
       bcrypt.compare(password, passwordFromDB)
       .then((res) => {
         if(res === true) {
-          alert('로그인 성공');
           navigate('/');
           localStorage.setItem('userData', JSON.stringify({
             email: emailFromDB,
@@ -65,8 +64,11 @@ function Login() {
           <Form.Control id='password' type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button style={{marginRight: '5px'}} variant="primary" type="submit">
           로그인
+        </Button>
+        <Button variant="primary" type="button" onClick={()=>navigate('/user/register')}>
+          회원가입
         </Button>
       </Form>
     </div>

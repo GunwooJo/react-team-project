@@ -8,13 +8,22 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { InputGroup } from 'react-bootstrap';
 import free_icon_recipe_book from '../assets/free_icon_recipe_book.png';
+import free_icon_user_profile from '../assets/free-icon-user-profile-4803050.png';
 import { serviceDB } from '../constants/apidata';
 import { useNavigate } from 'react-router-dom';
 
 function Header() {
   const navigate = useNavigate();
   const [dropdownTitle, setDropdownTitle] = useState('이름');
+  const [logginedUserData, setLogginedUserData] = useState(null);
   const inpRef = useRef();
+
+  useEffect(() => {
+    if(localStorage.getItem('userData')) {
+      setLogginedUserData(localStorage.getItem('userData'));
+    }
+  }, [])
+
   //검색칸 옆의 드랍다운 버튼을 눌렀을 때 일어날 동작.
   const handleSelectDropdown = (eventKey) => {
     setDropdownTitle(eventKey);
@@ -37,6 +46,12 @@ function Header() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('userData');
+    setLogginedUserData(null);
+    alert('로그아웃 되었어요!');
+  }
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
@@ -58,8 +73,9 @@ function Header() {
             <Nav.Link href="/recipe/list">둘러보기</Nav.Link>
             <Nav.Link href="/recipe/addUserRecipe">레시피등록</Nav.Link>
             <Nav.Link href="/recipe/UserRecipeList">유저들의 레시피</Nav.Link>
+            { !logginedUserData && <Nav.Link href="/user/login"><img style={{width: '30px'}} src={free_icon_user_profile} /></Nav.Link>}
           </Nav>
-
+          { logginedUserData && <Button style={{marginRight: '10px'}} variant='outline-secondary' onClick={handleLogout}>로그아웃</Button> }
           <Form className="d-flex">
             {/* 엔터 이벤트에서 새로고침 발생 
              => form에 input 하나만 존재해서 => 한개더 추가 후 안보이게*/}
