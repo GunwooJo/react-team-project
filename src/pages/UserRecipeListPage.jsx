@@ -51,7 +51,7 @@ function UserRecipeListPage() {
                         <ListGroup key={data.id} as="ol">
                             <ListGroup.Item as="li" className="d-flex justify-content-between align-items-start">
                                 <div className="ms-2 me-auto">
-                                    <div>작성자 : {user.nickname}</div>
+                                    <div>작성자 : {data.nickName}</div>
                                     <br />
                                     <div>{data.RCP_NM}</div>
                                     <pre>{data.RCP_PARTS_DTLS}</pre>

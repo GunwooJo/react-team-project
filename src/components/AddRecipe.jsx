@@ -17,7 +17,8 @@ const AddRecipe =()=>{
         axios.post('http://localhost:3001/addRecipe',{
             RCP_NM: title,
             RCP_PARTS_DTLS : des,
-            userId : user.id
+            userId : user.id,
+            nickName : user.nickname
         }).then(()=>{
             alert('작성되었습니다!');
             setTitle('')
